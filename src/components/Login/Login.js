@@ -1,15 +1,27 @@
 import axios from "axios";
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import { UserContext } from "../../App";
 
 import "./Login.scss";
 
 const Login = () => {
   const [loginUser, setLoginUser] = useState("");
   const [loginPass, setLoginPass] = useState("");
+  const { user, setUser } = useContext(UserContext);
 
   const [errorMessage, setErrorMessage] = useState(null);
   const navigate = useNavigate();
+
+  const getLoggedInUser = () => {
+    axios({
+      method: "GET",
+      withCredentials: true,
+      url: "http://localhost:4000/user",
+    }).then((res) => {
+      setUser(res.data);
+    });
+  };
 
   const loginExistingUser = () => {
     if (loginUser === "") {
@@ -28,6 +40,7 @@ const Login = () => {
       })
         .then((res) => {
           if (res.data === "Successfully Authenticated") {
+            getLoggedInUser();
             setErrorMessage("Logging in...");
             setTimeout(() => {
               navigate("/dashboard");
@@ -54,7 +67,7 @@ const Login = () => {
     }
   };
 
-  return (
+  return !user ? (
     <div className="loginForm">
       <h3>Login to HQ Links</h3>
       <label htmlFor="Username">Username</label>
@@ -82,6 +95,8 @@ const Login = () => {
         <button>register now</button>
       </Link>
     </div>
+  ) : (
+    <Navigate to="/dashboard" />
   );
 };
 

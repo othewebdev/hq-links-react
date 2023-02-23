@@ -10,20 +10,6 @@ export const UserContext = createContext();
 function App() {
   const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    const getLoggedInUser = () => {
-      axios({
-        method: "GET",
-        withCredentials: true,
-        url: "http://localhost:4000/user",
-      }).then((res) => {
-        setUser(res.data);
-      });
-    };
-    getLoggedInUser();
-    console.log(user);
-  }, []);
-
   return (
     <div className="App">
       <UserContext.Provider value={{ user, setUser }}>
@@ -31,7 +17,7 @@ function App() {
           <Route path="*" element={<Navigate to="/login" replace />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
-          <Route path="/dashboard" element={<Dashboard userInfo={user} />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </UserContext.Provider>
     </div>
