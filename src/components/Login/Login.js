@@ -1,25 +1,15 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
 import "./Login.scss";
 
 const Login = () => {
   const [loginUser, setLoginUser] = useState("");
   const [loginPass, setLoginPass] = useState("");
-  const [data, setData] = useState(null);
+
   const [errorMessage, setErrorMessage] = useState(null);
   const navigate = useNavigate();
-
-  const getLoggedInUser = () => {
-    axios({
-      method: "GET",
-      withCredentials: true,
-      url: "http://localhost:4000/user",
-      validateStatus: false,
-    }).then((res) => {
-      setData(res.data);
-    });
-  };
 
   const loginExistingUser = () => {
     if (loginUser === "") {
@@ -40,7 +30,6 @@ const Login = () => {
           if (res.data === "Successfully Authenticated") {
             setErrorMessage("Logging in...");
             setTimeout(() => {
-              getLoggedInUser();
               navigate("/dashboard");
             }, 1700);
           } else {
