@@ -1,0 +1,29 @@
+.release_form-container {
+  min-width: 250px;
+}
+.button-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.release_image-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 205px;
+  margin: 24px 0;
+  img {
+    margin: 5px 0;
+  }
+}
+
+.final_image-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 12px 0;
+  img {
+    margin: 18px 0;
+  }
+}

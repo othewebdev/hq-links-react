@@ -3,7 +3,7 @@
 :root {
   --max-width: 1100px;
   --primary: 255, 255, 255;
-  --accent: hsl(347 93% 42% / 1);
+  --accent: #cf0733;
   --text: hsl(0, 0%, 75%);
   --heading: hsl(0, 0%, 34%);
 }
@@ -21,6 +21,7 @@
   outline: none;
   border: 1px solid var(--accent);
   min-width: 175px;
+  max-width: auto;
   color: var(--accent);
   font-size: 16px;
   transition: 0.1s ease-in all;
@@ -35,8 +36,31 @@
   }
 }
 
+.button-small {
+  background-color: transparent;
+  color: var(--accent);
+  font-size: 16px;
+  outline: none;
+  border: none;
+  height: 35px;
+
+  line-height: 0;
+  transition: 0.1s ease-in all;
+  &:hover {
+    cursor: pointer;
+    color: var(--heading);
+    outline: none;
+  }
+}
+
 input,
 select {
+  height: 40px;
+  width: 275px;
+  padding-left: 6px;
+}
+
+.select {
   height: 40px;
   width: 275px;
   padding-left: 6px;

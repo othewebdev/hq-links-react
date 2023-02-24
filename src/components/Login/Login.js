@@ -1,14 +1,12 @@
 import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
-import { UserContext } from "../../App";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import "./Login.scss";
 
 const Login = () => {
   const [loginUser, setLoginUser] = useState("");
   const [loginPass, setLoginPass] = useState("");
-  const { user, setUser } = useContext(UserContext);
 
   const [errorMessage, setErrorMessage] = useState(null);
   const navigate = useNavigate();
