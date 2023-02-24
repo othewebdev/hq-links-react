@@ -4,6 +4,8 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 
+import "./global.scss";
+
 export const UserContext = createContext();
 
 function App() {

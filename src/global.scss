@@ -1,0 +1,34 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
+
+:root {
+  --max-width: 1100px;
+  --primary: 255, 255, 255;
+  --accent: hsl(347 93% 42% / 1);
+}
+
+* {
+  font-family: "Inter", sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  padding: 20px 32px;
+  background-color: transparent;
+  outline: none;
+  border: 1px solid var(--accent);
+  min-width: 175px;
+  color: var(--accent);
+  font-size: 16px;
+  transition: 0.1s ease-in all;
+  margin: 35px 0;
+  text-transform: capitalize;
+  &:hover {
+    cursor: pointer;
+    border: 1px solid var(--accent);
+    background-color: var(--accent);
+    color: white;
+    outline: none;
+  }
+}

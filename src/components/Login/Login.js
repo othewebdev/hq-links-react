@@ -47,7 +47,7 @@ const Login = () => {
             }, 1700);
           } else {
             setErrorMessage(
-              "Sorry, we were unable to find this user. Please try again"
+              "Sorry, we were unable to find this user. Please try again."
             );
             setLoginUser("");
             setLoginPass("");
@@ -69,31 +69,31 @@ const Login = () => {
 
   return !user ? (
     <div className="loginForm">
-      <h3>Login to HQ Links</h3>
-      <label htmlFor="Username">Username</label>
-      <input
-        placeholder="username"
-        type="text"
-        onChange={(e) => setLoginUser(e.target.value)}
-        value={loginUser}
-        onKeyDown={handleOnKeydown}
-      />
-      <label htmlFor="Password">Password</label>
-      <input
-        placeholder="password"
-        type="password"
-        onChange={(e) => setLoginPass(e.target.value)}
-        value={loginPass}
-        onKeyDown={handleOnKeydown}
-      />
+      <h3>HQ Links</h3>
+      <div className="inputContainer">
+        <label htmlFor="Username">Username</label>
+        <input
+          placeholder="Username"
+          type="text"
+          onChange={(e) => setLoginUser(e.target.value)}
+          value={loginUser}
+          onKeyDown={handleOnKeydown}
+        />
+      </div>
+      <div className="inputContainer">
+        <label htmlFor="Password">Password</label>
+        <input
+          placeholder="Password"
+          type="password"
+          onChange={(e) => setLoginPass(e.target.value)}
+          value={loginPass}
+          onKeyDown={handleOnKeydown}
+        />
+      </div>
       {errorMessage !== null && <p>{errorMessage}</p>}
-      <button onClick={loginExistingUser} type="submit">
+      <button className="button" onClick={loginExistingUser} type="submit">
         Login
       </button>
-      <p>Not currently a user?</p>
-      <Link to="/register">
-        <button>register now</button>
-      </Link>
     </div>
   ) : (
     <Navigate to="/dashboard" />
