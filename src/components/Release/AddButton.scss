@@ -1,0 +1,34 @@
+.release-addIcon {
+  width: 128px;
+  transition: 0.2s ease all;
+}
+
+.release-button {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  width: 175px;
+  margin: 10px 12px;
+  label {
+    margin: 8px 0;
+  }
+}
+
+.release-button-inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgb(245, 245, 245);
+  width: auto;
+  height: auto;
+  padding: 20px 10px;
+  transition: 0.2s ease all;
+  &:hover {
+    background: rgb(206, 206, 206);
+    cursor: pointer;
+    .release-addIcon {
+      filter: brightness(80%);
+    }
+  }
+}

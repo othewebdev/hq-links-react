@@ -19,7 +19,7 @@ const Login = () => {
       withCredentials: true,
       url: "http://localhost:4000/user",
     }).then((res) => {
-      setUser(res.data);
+      window.localStorage.setItem("APP_USER", res.data.username);
     });
   };
 
@@ -69,8 +69,8 @@ const Login = () => {
 
   return !user ? (
     <div className="loginForm">
-      <h3>HQ Links</h3>
-      <div className="inputContainer">
+      <h2 className="heading">HQ Links</h2>
+      <div className="input-container">
         <label htmlFor="Username">Username</label>
         <input
           placeholder="Username"
@@ -80,7 +80,7 @@ const Login = () => {
           onKeyDown={handleOnKeydown}
         />
       </div>
-      <div className="inputContainer">
+      <div className="input-container">
         <label htmlFor="Password">Password</label>
         <input
           placeholder="Password"

@@ -1,0 +1,13 @@
+.outer-container {
+  width: 100%;
+  display: flex;
+  h3 {
+    color: var(--text);
+  }
+}
+
+.link-container {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}

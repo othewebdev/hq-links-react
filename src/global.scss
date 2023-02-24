@@ -4,6 +4,8 @@
   --max-width: 1100px;
   --primary: 255, 255, 255;
   --accent: hsl(347 93% 42% / 1);
+  --text: hsl(0, 0%, 75%);
+  --heading: hsl(0, 0%, 34%);
 }
 
 * {
@@ -31,4 +33,34 @@ button {
     color: white;
     outline: none;
   }
+}
+
+input {
+  height: 40px;
+  width: 275px;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  margin: 6px 0;
+  label {
+    font-size: 16px;
+    margin: 4px 0;
+  }
+}
+
+.page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.heading {
+  text-transform: capitalize;
+  margin: 8px auto;
+  color: var(--heading);
+  font-size: 24px;
 }
