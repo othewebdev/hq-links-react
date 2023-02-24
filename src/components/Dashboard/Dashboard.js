@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../App";
+import { DASH_GREETING_MESSAGE } from "../../data/greetingMessage";
 
-import "./Dashboard.scss";
 import LinkCreator from "./LinkCreator/LinkCreator";
 
 const Dashboard = () => {
@@ -12,7 +12,11 @@ const Dashboard = () => {
   const localStorageUser = window.localStorage.getItem("APP_USER");
 
   useEffect(() => {
-    setUser(localStorageUser.username);
+    if (localStorageUser) {
+      setUser(localStorageUser.username);
+    } else {
+      navigate("/login");
+    }
   }, []);
 
   const handleLogout = () => {
@@ -23,10 +27,15 @@ const Dashboard = () => {
 
   return (
     <div className="container">
-      <div className="main-dashboard">
-        <h2 className="heading">hello {localStorageUser} </h2>
+      <div className="main-panel">
+        <h2 className="heading">
+          {DASH_GREETING_MESSAGE}{" "}
+          <span className="username">{localStorageUser}!</span>
+        </h2>
         <LinkCreator />
-        <button onClick={handleLogout}>logout</button>
+        <button className="button" onClick={handleLogout}>
+          logout
+        </button>
       </div>
     </div>
   );

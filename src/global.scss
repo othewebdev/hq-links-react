@@ -15,7 +15,7 @@
   padding: 0;
 }
 
-button {
+.button {
   padding: 20px 32px;
   background-color: transparent;
   outline: none;
@@ -35,9 +35,11 @@ button {
   }
 }
 
-input {
+input,
+select {
   height: 40px;
   width: 275px;
+  padding-left: 6px;
 }
 
 .input-container {
@@ -47,7 +49,7 @@ input {
   margin: 6px 0;
   label {
     font-size: 16px;
-    margin: 4px 0;
+    margin: 8px 0;
   }
 }
 
@@ -59,8 +61,43 @@ input {
 }
 
 .heading {
-  text-transform: capitalize;
+  &::first-letter {
+    text-transform: capitalize;
+  }
   margin: 8px auto;
   color: var(--heading);
   font-size: 24px;
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.main-panel {
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  padding: 25px 20px;
+  button {
+    float: right;
+  }
+}
+
+p {
+  color: var(--text);
+  font-size: 16px;
+}
+
+.p-link {
+  transition: 0.2s ease all;
+  cursor: pointer;
+  &:hover {
+    color: var(--accent);
+  }
+}
+
+.username {
+  text-transform: capitalize;
 }

@@ -1,6 +1,6 @@
 import axios from "axios";
-import React, { useContext, useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import { UserContext } from "../../App";
 
 import "./Login.scss";
@@ -13,6 +13,14 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const currentUser = window.localStorage.getItem("APP_USER");
+    console.log(currentUser);
+    if (currentUser) {
+      navigate("/dashboard");
+    }
+  }, []);
+
   const getLoggedInUser = () => {
     axios({
       method: "GET",
@@ -21,6 +29,13 @@ const Login = () => {
     }).then((res) => {
       window.localStorage.setItem("APP_USER", res.data.username);
     });
+  };
+
+  const handleOnKeydown = (e) => {
+    //it triggers by pressing the enter key
+    if (e.keyCode === 13) {
+      loginExistingUser();
+    }
   };
 
   const loginExistingUser = () => {
@@ -60,14 +75,7 @@ const Login = () => {
     }
   };
 
-  const handleOnKeydown = (e) => {
-    //it triggers by pressing the enter key
-    if (e.keyCode === 13) {
-      loginExistingUser();
-    }
-  };
-
-  return !user ? (
+  return (
     <div className="loginForm">
       <h2 className="heading">HQ Links</h2>
       <div className="input-container">
@@ -95,8 +103,6 @@ const Login = () => {
         Login
       </button>
     </div>
-  ) : (
-    <Navigate to="/dashboard" />
   );
 };
 

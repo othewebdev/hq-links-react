@@ -11,7 +11,7 @@ const LinkCreator = () => {
   ];
   return (
     <div className="outer-container">
-      <h3>Create a New Smart Link:</h3>
+      <h3>Create a New Link</h3>
       <div className="link-container">
         {releaseTypes.map((type) => (
           <AddButton type={type} />
