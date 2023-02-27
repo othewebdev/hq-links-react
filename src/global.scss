@@ -77,6 +77,12 @@ select {
   }
 }
 
+.error-text {
+  margin: 8px 0;
+  color: red;
+  font-size: 14px;
+}
+
 .page {
   display: flex;
   justify-content: center;
