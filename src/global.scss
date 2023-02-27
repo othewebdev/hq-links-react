@@ -99,12 +99,25 @@ select {
   font-size: 24px;
 }
 
+.heading-dashboard {
+  @extend .heading;
+  text-align: center;
+}
+
 .container {
   display: flex;
   width: 100%;
   justify-content: center;
   align-items: center;
   height: 100vh;
+}
+
+.text-margin-top {
+  margin: 8px 0;
+}
+
+.text-center {
+  text-align: center;
 }
 
 .main-panel {

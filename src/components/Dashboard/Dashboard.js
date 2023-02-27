@@ -40,7 +40,7 @@ const Dashboard = () => {
   return (
     <div className="container">
       <div className="main-panel">
-        <h2 className="heading">
+        <h2 className="heading-dashboard">
           {DASH_GREETING_MESSAGE}{" "}
           <span className="username">{localStorageUser}!</span>
         </h2>
@@ -66,7 +66,7 @@ const Dashboard = () => {
             <>
               <div className="main-panel">
                 <h3 className="heading">{release.releaseName}</h3>
-                <p>{release.artist}</p>
+                <p className="text-margin-top">{release.artist}</p>
                 <p>{release.releaseDate}</p>
                 <button>edit</button>
                 <button onClick={() => handleDeleteCurrentRelease()}>
