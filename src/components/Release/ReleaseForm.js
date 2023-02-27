@@ -4,7 +4,7 @@ import { LOGIN_FORM_ERRORS } from "../../data/errorMessages";
 import Select from "react-select";
 import "react-datepicker/dist/react-datepicker.css";
 import ReactImageUploading from "react-images-uploading";
-import { ReleaseFormContext } from "../../App";
+import { ReleaseFormContext, UserContext } from "../../App";
 
 import "./ReleaseForm.scss";
 import ReactModal from "react-modal";
@@ -23,6 +23,7 @@ const ReleaseForm = ({ artistList }) => {
   const [isImageUrlModalOpen, setIsImageUrlModalOpen] = useState(false);
   const { releaseFormDetails, setReleaseFormDetails } =
     useContext(ReleaseFormContext);
+  const { user, setUser } = useContext(UserContext);
 
   const maxNumber = 1;
 
@@ -84,16 +85,26 @@ const ReleaseForm = ({ artistList }) => {
     });
   };
 
-  const onSubmit = (values, onSubmitProps) => {
-    onSubmitProps.setSubmitting(false);
+  useEffect(() => {
+    console.log(releaseFormDetails);
+  }, [releaseFormDetails]);
+
+  const onSubmit = async (values) => {
     setReleaseFormDetails({
       ...releaseFormDetails,
       ...values,
       image: chosenImage,
-      isSubmitted: true,
+      // isSubmitted: true,
+      releaseId: "",
     });
-    console.log(releaseFormDetails);
   };
+
+  useEffect(() => {
+    window.localStorage.setItem(
+      "USER_RELEASES",
+      JSON.stringify([releaseFormDetails])
+    );
+  }, [releaseFormDetails]);
 
   return artistList ? (
     <div className="release_form-container">
@@ -301,7 +312,7 @@ const ReleaseForm = ({ artistList }) => {
                 disabled={!formik.isValid || formik.isSubmitting}
                 className="button-small"
               >
-                Done
+                Continue →
               </button>
             </Form>
           );
