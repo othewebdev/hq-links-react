@@ -15,10 +15,6 @@ const AddReleasePage = ({ artistList }) => {
     navigate("/dashboard");
   };
 
-  const handleBackToReleases = () => {
-    window.location.reload();
-  };
-
   useEffect(() => {
     const localStorageUser = window.localStorage.getItem("APP_USER");
     if (localStorageUser) {
@@ -38,42 +34,7 @@ const AddReleasePage = ({ artistList }) => {
         ) : (
           <></>
         )}
-
-        {releaseFormDetails.isSubmitted !== true && (
-          <ReleaseForm artistList={artistList} />
-        )}
-
-        {releaseFormDetails.isSubmitted === true && (
-          <>
-            <h3 className="heading">Congratulations!</h3>
-            <p>Ready to add your links?</p>
-            <button
-              onClick={() => {
-                navigate("/add-links");
-              }}
-              className="button-small"
-            >
-              Add Links →
-            </button>
-            <button
-              onClick={() => {
-                handleBackToReleases();
-              }}
-              className="button-small"
-            >
-              Create a New Release
-            </button>
-            <button
-              onClick={() => {
-                navigate("/edit-release");
-              }}
-              className="button-small"
-            >
-              ← Edit My Release
-            </button>
-          </>
-        )}
-        <DSPList />
+        <ReleaseForm artistList={artistList} />
       </div>
     </div>
   );

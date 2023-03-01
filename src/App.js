@@ -1,13 +1,14 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Dashboard from "./components/Dashboard/Dashboard";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 
-import "./global.scss";
-import AddReleasePage from "./pages/AddReleasePage";
 import axios from "axios";
+import "./global.scss";
 import AddDSPsPage from "./pages/AddDSPsPage";
+import AddReleasePage from "./pages/AddReleasePage";
+import ReleasePreviewPage from "./pages/ReleasePreviewPage";
 
 export const UserContext = createContext();
 export const ArtistListContext = createContext({
@@ -49,6 +50,7 @@ function App() {
               path="/add-release"
               element={<AddReleasePage artistList={artistList} />}
             />
+            <Route path="/finalize-release" element={<ReleasePreviewPage />} />
             <Route path="/add-links" element={<AddDSPsPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />

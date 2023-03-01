@@ -29,7 +29,6 @@ export const dspSchema = yup.object().shape({
 });
 
 export const releaseFormSchema = yup.object().shape({
-  artist: yup.string().required("Required"),
   releaseName: yup
     .string()
     .required("Please enter a name")

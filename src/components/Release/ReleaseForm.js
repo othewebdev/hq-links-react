@@ -4,16 +4,15 @@ import { LOGIN_FORM_ERRORS } from "../../data/errorMessages";
 import Select from "react-select";
 import "react-datepicker/dist/react-datepicker.css";
 import ReactImageUploading from "react-images-uploading";
-import { ReleaseFormContext, UserContext } from "../../App";
-
-import "./ReleaseForm.scss";
+import { ReleaseFormContext } from "../../App";
 import ReactModal from "react-modal";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { releaseFormSchema } from "../Formik/Schemas";
 import TextError from "../Formik/TextError";
+import { useNavigate } from "react-router-dom";
+import "./ReleaseForm.scss";
 
 const ReleaseForm = ({ artistList }) => {
-  const [releaseDate, setReleaseDate] = useState(new Date());
   const [previewImage, setPreviewImage] = useState([]);
   const [selectedOption, setSelectedOption] = useState(null);
   const [imageUrl, setImageUrl] = useState("");
@@ -23,7 +22,9 @@ const ReleaseForm = ({ artistList }) => {
   const [isImageUrlModalOpen, setIsImageUrlModalOpen] = useState(false);
   const { releaseFormDetails, setReleaseFormDetails } =
     useContext(ReleaseFormContext);
-  const { user, setUser } = useContext(UserContext);
+  const navigate = useNavigate();
+
+  const localStorageUser = window.localStorage.getItem("APP_USER");
 
   const maxNumber = 1;
 
@@ -46,7 +47,6 @@ const ReleaseForm = ({ artistList }) => {
     setPreviewImage(imageList);
   };
   const handleOnKeydown = (e) => {
-    //it triggers by pressing the enter key
     if (e.keyCode === 13) {
     }
   };
@@ -73,7 +73,10 @@ const ReleaseForm = ({ artistList }) => {
     setIsUploadModalOpen(false);
     setReleaseFormDetails({
       ...releaseFormDetails,
-      image: chosenImage,
+      release: {
+        ...releaseFormDetails.release,
+        releaseImage: chosenImage,
+      },
     });
   };
 
@@ -85,32 +88,26 @@ const ReleaseForm = ({ artistList }) => {
     });
   };
 
-  useEffect(() => {
-    console.log(releaseFormDetails);
-  }, [releaseFormDetails]);
-
   const onSubmit = async (values) => {
     setReleaseFormDetails({
       ...releaseFormDetails,
       ...values,
+      artist: localStorageUser.toString(),
       image: chosenImage,
-      // isSubmitted: true,
       releaseId: "",
     });
-  };
-
-  useEffect(() => {
+    console.log(releaseFormDetails);
     window.localStorage.setItem(
       "USER_RELEASES",
       JSON.stringify([releaseFormDetails])
     );
-  }, [releaseFormDetails]);
+    navigate("/add-links");
+  };
 
   return artistList ? (
     <div className="release_form-container">
       <Formik
         initialValues={{
-          artist: "Choose",
           releaseDate: "",
           releaseName: "",
         }}
@@ -124,15 +121,7 @@ const ReleaseForm = ({ artistList }) => {
             <Form>
               <div className="input-container">
                 <label htmlFor="Release title">Artist</label>
-                <Field as="select" name="artist" defaultValue="Choose...">
-                  <option disabled value="">
-                    (Choose an artist...)
-                  </option>
-                  {artistList !== "" &&
-                    artistList?.map((artist, i) => (
-                      <option key={i}>{artist}</option>
-                    ))}
-                </Field>
+                <h3>{localStorageUser}</h3>
               </div>
               <div className="input-container">
                 <label htmlFor="Release title">Release name</label>
@@ -197,7 +186,6 @@ const ReleaseForm = ({ artistList }) => {
                         imageList,
                         onImageUpload,
                         onImageUpdate,
-                        onImageRemove,
                         isDragging,
                         dragProps,
                       }) => (

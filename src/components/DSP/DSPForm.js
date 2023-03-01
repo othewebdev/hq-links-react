@@ -1,27 +1,22 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import React, { useContext, useState } from "react";
-import ReactModal from "react-modal";
+import { useNavigate } from "react-router-dom";
 import { ReleaseFormContext } from "../../App";
-import TextError from "../Formik/TextError";
 import { dspSchema } from "../Formik/Schemas";
+import TextError from "../Formik/TextError";
 
-const DSPForm = ({ isModalOpen, setIsModalOpen }) => {
-  const [urlLinks, setUrlLinks] = useState({});
-  // const formik = useFormik();
+const DSPForm = () => {
+  const navigate = useNavigate();
 
   const { releaseFormDetails, setReleaseFormDetails } =
     useContext(ReleaseFormContext);
 
-  const handleSubmitDSPs = () => {
-    setIsModalOpen(false);
+  const onSubmit = (values, onSubmitProps) => {
     setReleaseFormDetails({
       ...releaseFormDetails,
-      dsps: [urlLinks],
+      dsps: values,
     });
-  };
-
-  const onSubmit = (values, onSubmitProps) => {
-    setUrlLinks(values);
+    navigate("/finalize-release");
     onSubmitProps.setSubmitting(false);
   };
 
