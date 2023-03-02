@@ -12,7 +12,7 @@ const ReleaseCard = ({ release, user }) => {
   const deleteRelease = async () => {
     await axios({
       method: "DELETE",
-      withCredentials: true,
+
       url: `https://hq-links-api-2.vercel.app/releases/${user}/${release._id}`,
     })
       .then(() => {

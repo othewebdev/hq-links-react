@@ -24,12 +24,13 @@ const ReleasePreview = () => {
 
   const postToApi = async () => {
     console.log(releaseFormDetails.image);
+
     await axios({
       method: "POST",
-      withCredentials: true,
       url: "https://hq-links-api-2.vercel.app/releases",
+      withCredentials: false,
       headers: {
-        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Origin": "http://localhost:3000",
         "Content-Type": "application/json",
       },
       data: {
@@ -38,7 +39,7 @@ const ReleasePreview = () => {
           release_name: releaseFormDetails.releaseName,
           release_date: releaseFormDetails.releaseDate.toLocaleDateString(),
           release_image_url:
-            (releaseFormDetails.image && releaseFormDetails.image) || "",
+            "https://stackoverflow.com/questions/50614397/value-of-the-access-control-allow-origin-header-in-the-response-must-not-be-th",
         },
         dsps: {
           urls: [releaseFormDetails.dsps],

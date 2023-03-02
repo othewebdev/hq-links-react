@@ -11,6 +11,7 @@ import AddReleasePage from "./pages/AddReleasePage";
 import ReleasePreviewPage from "./pages/ReleasePreviewPage";
 import Navbar from "./components/Navbar/Navbar";
 import AddLinkPage from "./pages/AddLinkPage";
+import Layout from "./components/Layout/Layout";
 
 export const UserContext = createContext();
 export const ArtistListContext = createContext({
@@ -26,7 +27,7 @@ function App() {
   const fetchArtist = async () => {
     axios({
       method: "GET",
-      withCredentials: true,
+
       url: "https://my-json-server.typicode.com/othewebdev/hq-links-api/artists",
     })
       .then((res) => {
@@ -44,23 +45,28 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar />
       <UserContext.Provider value={{ user, setUser }}>
         <ReleaseFormContext.Provider
           value={{ releaseFormDetails, setReleaseFormDetails }}
         >
           <Routes>
             <Route path="*" element={<Navigate to="/login" replace />} />
-            <Route
-              path="/add-release"
-              element={<AddReleasePage artistList={artistList} />}
-            />
-            <Route path="/new-link" element={<AddLinkPage />} />
-            <Route path="/finalize-release" element={<ReleasePreviewPage />} />
-            <Route path="/add-links" element={<AddDSPsPage />} />
             <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/admin" element={<Dashboard />} />
+            <Route path="/" element={<Layout />}>
+              <Route
+                path="/add-release"
+                element={<AddReleasePage artistList={artistList} />}
+              />
+              <Route path="/new-link" element={<AddLinkPage />} />
+              <Route
+                path="/finalize-release"
+                element={<ReleasePreviewPage />}
+              />
+              <Route path="/add-links" element={<AddDSPsPage />} />
+
+              <Route path="/register" element={<RegisterPage />} />
+              <Route path="/admin" element={<Dashboard />} />
+            </Route>
           </Routes>
         </ReleaseFormContext.Provider>
       </UserContext.Provider>

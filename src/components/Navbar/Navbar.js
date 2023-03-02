@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { SiGoogleanalytics, SiPlatformdotsh, SiSvgo } from "react-icons/si";
 
-import "./Navbar.scss";
 import ProfileDropdown from "./ProfileDropdown";
+
+import "./Navbar.scss";
 
 const Navbar = () => {
   const localStorageUser = window.localStorage.getItem("APP_USER");
@@ -39,7 +40,7 @@ const Navbar = () => {
         >
           <img src="" alt="Profile Picture" />
         </div>
-        {openDropdown && <ProfileDropdown user={localStorageUser} />}
+        {openDropdown && <ProfileDropdown currentUser={localStorageUser} />}
       </div>
     </nav>
   );

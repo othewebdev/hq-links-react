@@ -1,10 +1,17 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Fade } from "react-reveal";
-
+import { UserContext } from "../../App";
 import "./ProfileDropdown.scss";
 
-const ProfileDropdown = ({ user }) => {
+const ProfileDropdown = ({ currentUser }) => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    window.localStorage.removeItem("APP_USER");
+    navigate("/login");
+  };
+
   return (
     <Fade>
       <div className="dropdown">
@@ -12,8 +19,8 @@ const ProfileDropdown = ({ user }) => {
           <div className="user-heading">
             <img src="" alt="" />
             <div className="user-heading_inner">
-              <p>@{user}</p>
-              <p>hqrl.link/{user}</p>
+              <p>@{currentUser}</p>
+              <p>hqrl.link/{currentUser}</p>
             </div>
           </div>
           <h5 className="heading">Account</h5>
@@ -30,7 +37,11 @@ const ProfileDropdown = ({ user }) => {
           <li>
             <Link>Submit feedback</Link>
           </li>
-          <li>
+          <li
+            onClick={() => {
+              handleLogout();
+            }}
+          >
             <Link>Sign out</Link>
           </li>
         </ul>

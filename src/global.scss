@@ -108,6 +108,14 @@ select {
   font-size: 24px;
 }
 
+.heading-small-center {
+  @extend .heading;
+  font-size: 18px;
+  text-transform: capitalize;
+  margin: 24px 0;
+  text-align: center;
+}
+
 .heading-small {
   @extend .heading;
   margin: 10px auto;

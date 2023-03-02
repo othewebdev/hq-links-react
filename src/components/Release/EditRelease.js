@@ -15,7 +15,7 @@ const EditRelease = ({ release, isOpen, setIsOpen }) => {
     const getCurrentRelease = async () => {
       await axios({
         method: "GET",
-        withCredentials: true,
+
         url: `https://hq-links-api-2.vercel.app/releases/${release.artist_name}/${release._id}`,
       })
         .then((res) => {
@@ -29,7 +29,7 @@ const EditRelease = ({ release, isOpen, setIsOpen }) => {
   const onSubmit = async (values, onSubmitProps) => {
     await axios({
       method: "PATCH",
-      withCredentials: true,
+
       url: `https://hq-links-api-2.vercel.app/releases/${release.artist_name}/${release._id}`,
       data: {
         release: {
