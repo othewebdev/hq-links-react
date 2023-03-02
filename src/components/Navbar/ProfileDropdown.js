@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React from "react";
 import { Fade } from "react-reveal";
-import { UserContext } from "../../App";
+import { Link, useNavigate } from "react-router-dom";
+import onClickOutside from "react-onclickoutside";
+
 import "./ProfileDropdown.scss";
 
 const ProfileDropdown = ({ currentUser }) => {
@@ -13,40 +14,42 @@ const ProfileDropdown = ({ currentUser }) => {
   };
 
   return (
-    <Fade>
-      <div className="dropdown">
-        <ul>
-          <div className="user-heading">
-            <img src="" alt="" />
-            <div className="user-heading_inner">
-              <p>@{currentUser}</p>
-              <p>hqrl.link/{currentUser}</p>
+    <div>
+      <Fade>
+        <div className="dropdown">
+          <ul>
+            <div className="user-heading">
+              <img src="" alt="" />
+              <div className="user-heading_inner">
+                <p>@{currentUser}</p>
+                <p>hqrl.link/{currentUser}</p>
+              </div>
             </div>
-          </div>
-          <h5 className="heading">Account</h5>
-          <li>
-            <Link>My account</Link>
-          </li>
-          <li>
-            <Link>Settings</Link>
-          </li>
-          <h5 className="heading">Support</h5>
-          <li>
-            <Link>Ask a question</Link>
-          </li>
-          <li>
-            <Link>Submit feedback</Link>
-          </li>
-          <li
-            onClick={() => {
-              handleLogout();
-            }}
-          >
-            <Link>Sign out</Link>
-          </li>
-        </ul>
-      </div>
-    </Fade>
+            <h5 className="heading">Account</h5>
+            <li>
+              <Link>My account</Link>
+            </li>
+            <li>
+              <Link>Settings</Link>
+            </li>
+            <h5 className="heading">Support</h5>
+            <li>
+              <Link>Ask a question</Link>
+            </li>
+            <li>
+              <Link>Submit feedback</Link>
+            </li>
+            <li
+              onClick={() => {
+                handleLogout();
+              }}
+            >
+              <Link>Sign out</Link>
+            </li>
+          </ul>
+        </div>
+      </Fade>
+    </div>
   );
 };
 
