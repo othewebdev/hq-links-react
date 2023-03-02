@@ -52,7 +52,7 @@ const ReleaseForm = ({ artistList }) => {
   };
 
   const onFinalImageUpload = (imageList) => {
-    setChosenImage(imageList.data_url);
+    setChosenImage(imageList);
     setHasChosenImage(true);
     setPreviewImage("");
     setSelectedOption("");
@@ -96,11 +96,6 @@ const ReleaseForm = ({ artistList }) => {
       image: chosenImage,
       releaseId: "",
     });
-    console.log(releaseFormDetails);
-    window.localStorage.setItem(
-      "USER_RELEASES",
-      JSON.stringify([releaseFormDetails])
-    );
     navigate("/add-links");
   };
 
@@ -232,7 +227,9 @@ const ReleaseForm = ({ artistList }) => {
                                 </button>
                                 <button
                                   className="button-small"
-                                  onClick={() => onFinalImageUpload(image)}
+                                  onClick={() =>
+                                    onFinalImageUpload(image.data_url)
+                                  }
                                 >
                                   Upload
                                 </button>

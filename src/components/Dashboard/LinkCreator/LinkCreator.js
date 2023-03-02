@@ -1,7 +1,9 @@
 import React from "react";
 import AddButton from "../../Release/AddButton";
+import { Fade } from "react-reveal";
 
 import "./LinkCreator.scss";
+import BackToDash from "../BackToDash";
 
 const LinkCreator = () => {
   const releaseTypes = [
@@ -10,13 +12,18 @@ const LinkCreator = () => {
     { name: "Bio", url: "/add-bio" },
   ];
   return (
-    <div className="outer-container">
-      <div className="link-container">
-        {releaseTypes.map((type, i) => (
-          <AddButton type={type} key={i} />
-        ))}
+    <Fade>
+      <div>
+        <BackToDash />
+        <div className="card">
+          <div className="link-container">
+            <AddButton type={releaseTypes[0]} />
+            <AddButton type={releaseTypes[1]} />
+            <AddButton type={releaseTypes[2]} />
+          </div>
+        </div>
       </div>
-    </div>
+    </Fade>
   );
 };
 

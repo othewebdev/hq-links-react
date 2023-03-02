@@ -1,0 +1,9 @@
+.card-link {
+  text-decoration: none;
+  font-size: 20px;
+  color: black;
+  transition: 0.3s ease all;
+  &:hover {
+    color: var(--accent);
+  }
+}

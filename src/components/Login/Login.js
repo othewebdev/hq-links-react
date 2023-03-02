@@ -13,9 +13,8 @@ const Login = () => {
 
   useEffect(() => {
     const currentUser = window.localStorage.getItem("APP_USER");
-    console.log(currentUser);
     if (currentUser) {
-      navigate("/dashboard");
+      navigate("/admin");
     }
   }, []);
 
@@ -24,9 +23,11 @@ const Login = () => {
       method: "GET",
       withCredentials: true,
       url: "http://localhost:4000/user",
-    }).then((res) => {
-      window.localStorage.setItem("APP_USER", res.data.username);
-    });
+    })
+      .then((res) => {
+        window.localStorage.setItem("APP_USER", res.data.username);
+      })
+      .catch((err) => console.log(err.message));
   };
 
   const handleOnKeydown = (e) => {
@@ -56,7 +57,7 @@ const Login = () => {
             getLoggedInUser();
             setErrorMessage("Logging in...");
             setTimeout(() => {
-              navigate("/dashboard");
+              navigate("/admin");
             }, 1700);
           } else {
             setErrorMessage(
@@ -67,8 +68,7 @@ const Login = () => {
           }
         })
         .catch((err) => {
-          console.log(err);
-          throw err;
+          throw err.message;
         });
     }
   };

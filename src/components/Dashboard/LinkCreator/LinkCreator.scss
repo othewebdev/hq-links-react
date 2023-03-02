@@ -1,6 +1,10 @@
-.outer-container {
-  width: 100%;
+.card {
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  padding: 45px 20px;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
   h3 {
     color: var(--text);
   }
@@ -9,5 +13,4 @@
 .link-container {
   display: flex;
   width: 100%;
-  justify-content: flex-end;
 }

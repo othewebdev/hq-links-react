@@ -1,12 +1,11 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ReleaseFormContext, UserContext } from "../../App";
-import { DASH_GREETING_MESSAGE } from "../../data/greetingMessage";
+import { UserContext } from "../../App";
 import NoReleases from "../Release/NoReleases";
+import HeadShake from "react-reveal/HeadShake";
 import UserReleases from "../Release/UserReleases";
-
-import LinkCreator from "./LinkCreator/LinkCreator";
+import { Fade } from "react-reveal";
 
 const Dashboard = () => {
   const { user, setUser } = useContext(UserContext);
@@ -21,9 +20,11 @@ const Dashboard = () => {
         method: "GET",
         withCredentials: true,
         url: `https://hq-links-api-2.vercel.app/releases/${localStorageUser}`,
-      }).then((res) => {
-        setUserReleases(res.data);
-      });
+      })
+        .then((res) => {
+          setUserReleases(res.data);
+        })
+        .catch((err) => console.log(err.message));
     };
     if (userReleases.length === 0) {
       getAllArtistReleases();
@@ -49,20 +50,15 @@ const Dashboard = () => {
 
   return (
     <div className="page">
-      <div className="main-panel">
-        <h2 className="heading-dashboard">
-          {DASH_GREETING_MESSAGE}{" "}
-          <span className="username">{localStorageUser}!</span>
-        </h2>
-        <LinkCreator />
-        {userReleases.length !== 0 ? (
-          <UserReleases releases={userReleases} user={localStorageUser} />
-        ) : (
-          <NoReleases />
+      <div>
+        {userReleases.length !== 0 && (
+          <Fade>
+            <UserReleases releases={userReleases} user={localStorageUser} />
+          </Fade>
         )}
-        <button className="button" onClick={handleLogout}>
-          logout
-        </button>
+        <Fade>
+          <NoReleases />
+        </Fade>
       </div>
     </div>
   );

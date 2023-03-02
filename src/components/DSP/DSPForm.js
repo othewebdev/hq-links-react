@@ -2,7 +2,7 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ReleaseFormContext } from "../../App";
-import { dspSchema } from "../Formik/Schemas";
+import { dspFormSchema } from "../Formik/Schemas";
 import TextError from "../Formik/TextError";
 
 const DSPForm = () => {
@@ -32,7 +32,7 @@ const DSPForm = () => {
           iheartradioUrl: "",
           tidalUrl: "",
         }}
-        validationSchema={dspSchema}
+        validationSchema={dspFormSchema}
         validateOnMount
         onSubmit={onSubmit}
         enableReinitialize

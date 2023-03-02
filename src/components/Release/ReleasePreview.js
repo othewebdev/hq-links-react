@@ -23,24 +23,29 @@ const ReleasePreview = () => {
   }, []);
 
   const postToApi = async () => {
+    console.log(releaseFormDetails.image);
     await axios({
       method: "POST",
       withCredentials: true,
       url: "https://hq-links-api-2.vercel.app/releases",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
       data: {
         artist_name: releaseFormDetails.artist,
         release: {
           release_name: releaseFormDetails.releaseName,
           release_date: releaseFormDetails.releaseDate.toLocaleDateString(),
           release_image_url:
-            "https://analytics.google.com/analytics/web/?authuser=5#/report-home/a17794234w35948555p35351924",
+            (releaseFormDetails.image && releaseFormDetails.image) || "",
         },
         dsps: {
           urls: [releaseFormDetails.dsps],
         },
       },
-    }).then((res) => {
-      navigate("/dashboard");
+    }).then(() => {
+      navigate("/admin");
     });
   };
 

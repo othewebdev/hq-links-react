@@ -1,0 +1,47 @@
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  height: 60px;
+  margin: 12px 0;
+  padding: 0 48px;
+}
+
+.nav-left-column {
+  display: flex;
+}
+
+.nav-links-container {
+  ul {
+    display: flex;
+  }
+  svg path {
+    transition: 0.2s ease all;
+  }
+  li {
+    list-style-type: none;
+    padding: 0 10px;
+    &:hover {
+      svg path {
+        color: var(--accent);
+      }
+      a {
+        color: var(--accent);
+      }
+    }
+    a {
+      font-size: 14px;
+      padding: 0 4px;
+      color: var(--dark-grey);
+      text-decoration: none;
+      transition: 0.2s ease all;
+    }
+  }
+}
+
+.nav-profile-container {
+  display: flex;
+  flex-direction: row-reverse;
+  cursor: pointer;
+}

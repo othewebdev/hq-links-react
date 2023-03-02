@@ -1,0 +1,45 @@
+.dropdown {
+  width: 18rem;
+  position: absolute;
+  text-align: start;
+  margin-top: 12px;
+  z-index: 999;
+  right: 40px;
+  background-color: white;
+  ul {
+    list-style-type: none;
+    a {
+      text-decoration: none;
+      color: var(--dark-gray);
+    }
+    h5 {
+      font-size: 16px;
+      padding-top: 24px;
+      padding-left: 24px;
+      padding-bottom: 12px;
+      margin: 0;
+    }
+    h5:nth-child(2) {
+      padding-top: 12px;
+    }
+    li {
+      text-transform: capitalize;
+      transition: 0.1s ease all;
+      padding: 24px;
+      &:hover {
+        background-color: var(--light-gray);
+      }
+    }
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    cursor: pointer;
+  }
+  .user-heading {
+    padding: 24px;
+
+    display: flex;
+  }
+  .user-heading_inner {
+    display: flex;
+    flex-direction: column;
+  }
+}

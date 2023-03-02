@@ -9,6 +9,8 @@ import "./global.scss";
 import AddDSPsPage from "./pages/AddDSPsPage";
 import AddReleasePage from "./pages/AddReleasePage";
 import ReleasePreviewPage from "./pages/ReleasePreviewPage";
+import Navbar from "./components/Navbar/Navbar";
+import AddLinkPage from "./pages/AddLinkPage";
 
 export const UserContext = createContext();
 export const ArtistListContext = createContext({
@@ -26,9 +28,11 @@ function App() {
       method: "GET",
       withCredentials: true,
       url: "https://my-json-server.typicode.com/othewebdev/hq-links-api/artists",
-    }).then((res) => {
-      setArtistList(res.data.names);
-    });
+    })
+      .then((res) => {
+        setArtistList(res.data.names);
+      })
+      .catch((err) => console.log(err.message));
   };
   useEffect(() => {
     if (artistList.length === 0) {
@@ -40,6 +44,7 @@ function App() {
 
   return (
     <div className="App">
+      <Navbar />
       <UserContext.Provider value={{ user, setUser }}>
         <ReleaseFormContext.Provider
           value={{ releaseFormDetails, setReleaseFormDetails }}
@@ -50,11 +55,12 @@ function App() {
               path="/add-release"
               element={<AddReleasePage artistList={artistList} />}
             />
+            <Route path="/new-link" element={<AddLinkPage />} />
             <Route path="/finalize-release" element={<ReleasePreviewPage />} />
             <Route path="/add-links" element={<AddDSPsPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/admin" element={<Dashboard />} />
           </Routes>
         </ReleaseFormContext.Provider>
       </UserContext.Provider>

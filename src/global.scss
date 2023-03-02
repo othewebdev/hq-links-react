@@ -6,6 +6,8 @@
   --accent: #cf0733;
   --text: hsl(0, 0%, 75%);
   --heading: hsl(0, 0%, 34%);
+  --light-gray: #f3f2f2;
+  --dark-gray: #232323;
 }
 
 * {
@@ -13,6 +15,15 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+.App {
+  height: 100vh;
+}
+
+html,
+body {
+  height: 100%;
 }
 
 .button {
@@ -42,10 +53,8 @@
   font-size: 16px;
   outline: none;
   border: none;
-  height: 35px;
-
-  line-height: 0;
   transition: 0.1s ease-in all;
+  padding: 0 4px;
   &:hover {
     cursor: pointer;
     color: var(--heading);
@@ -88,7 +97,6 @@ select {
   justify-content: center;
   align-items: center;
   height: 100%;
-  margin: 24px 0;
 }
 
 .heading {
@@ -128,11 +136,15 @@ select {
 }
 
 .main-panel {
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   padding: 25px 20px;
   button {
     float: right;
   }
+}
+
+.main-panel-shadow {
+  @extend .main-panel;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 p {
@@ -150,4 +162,27 @@ p {
 
 .username {
   text-transform: capitalize;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgb(247, 247, 247);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  transition: 0.2s ease all;
+  background: var(--dark-gray);
+  /* border-radius: 6px; */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  transition: 0.2s ease all;
+  background: var(--dark-gray);
 }
