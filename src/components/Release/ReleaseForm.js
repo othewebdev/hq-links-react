@@ -41,10 +41,11 @@ const ReleaseForm = ({ artistList }) => {
         uploadPreset: "pjjkl9ai",
       },
       function (error, result) {
-        if (!error) {
+        if (error || result.event === "success") {
+          const imageUrl = result.info.url;
           setReleaseFormDetails({
             ...releaseFormDetails,
-            image: result.data.info.files[0].uploadInfo.url,
+            image: imageUrl,
           });
         } else {
           console.log(error);
@@ -61,7 +62,7 @@ const ReleaseForm = ({ artistList }) => {
       artist: localStorageUser.toString(),
       releaseId: "",
     });
-    navigate("/add-links");
+    navigate("/add-links", { state: { release: releaseFormDetails } });
   };
 
   return artistList ? (

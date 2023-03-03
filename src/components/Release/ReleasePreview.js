@@ -23,6 +23,7 @@ const ReleasePreview = () => {
   }, []);
 
   const postToApi = async () => {
+    console.log(releaseFormDetails);
     await axios({
       method: "POST",
       url: "https://hq-links-api-2.vercel.app/releases",
@@ -59,43 +60,6 @@ const ReleasePreview = () => {
         <p className="heading">{releaseFormDetails.releaseName}</p>
         <p className="heading-small">{releaseFormDetails.artist}</p>
         <p>{formatDate(releaseFormDetails?.releaseDate)}</p>
-        <div className="dsp-link-container">
-          {releaseFormDetails?.dsps.appleUrl && (
-            <Link to={releaseFormDetails.dsps?.appleUrl}>
-              <img src="" alt="Apple Music" />
-            </Link>
-          )}
-          {releaseFormDetails.dsps.spotifyUrl && (
-            <Link to={releaseFormDetails.dsps?.spotifyUrl}>
-              <img src="" alt="Spotify" />
-            </Link>
-          )}
-          {releaseFormDetails.dsps.soundcloudUrl && (
-            <Link to={releaseFormDetails.dsps?.soundcloudUrl}>
-              <img src="" alt="SoundCloud" />
-            </Link>
-          )}
-          {releaseFormDetails.dsps.youtubeUrl && (
-            <Link to={releaseFormDetails.dsps?.youtubeUrl}>
-              <img src="" alt="YouTube" />
-            </Link>
-          )}
-          {releaseFormDetails.dsps?.tidalUrl && (
-            <Link to={releaseFormDetails.dsps?.tidalUrl}>
-              <img src="" alt="Tidal" />
-            </Link>
-          )}
-          {releaseFormDetails.dsps?.pandoraUrl && (
-            <Link to={releaseFormDetails.dsps?.pandoraUrl}>
-              <img src="" alt="Pandora" />
-            </Link>
-          )}
-          {releaseFormDetails.dsps?.iheartradioUrl && (
-            <Link to={releaseFormDetails.dsps?.iheartradioUrl}>
-              <img src="" alt="iHeartRadio" />
-            </Link>
-          )}
-        </div>
       </div>
       <div className="button-container">
         <button className="button-small" onClick={() => navigate("/add-links")}>

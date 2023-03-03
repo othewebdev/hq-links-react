@@ -5,6 +5,8 @@ import Header from "./Header";
 import { Fade } from "react-reveal";
 
 const Release = ({ release }) => {
+  const RegExp =
+    /^((https?|ftp|smtp):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/;
   return (
     <Fade>
       <div className="release-container">
@@ -14,12 +16,16 @@ const Release = ({ release }) => {
           artistName={release?.artist_name}
         />
         {release.dsps &&
-          release?.dsps?.urls[0]?.map((dsp) => (
-            <Link to={dsp.url}>
-              <img src={dsp.image_url} />
-              <div>{dsp.name}</div>
-            </Link>
-          ))}
+          release?.dsps?.urls?.map((dsp) => {
+            return RegExp.test(dsp.url) ? (
+              <Link to={dsp.url}>
+                <img src={dsp.image_url} width={128} />
+                <div>{dsp.name}</div>
+              </Link>
+            ) : (
+              <div />
+            );
+          })}
       </div>
     </Fade>
   );

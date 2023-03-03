@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import ReactDatePicker from "react-datepicker";
 import ReactImageUploading from "react-images-uploading";
 import { useLocation } from "react-router-dom";
+import { dspInitialValues } from "../Formik/InitialValues";
 import { editReleaseFormSchema } from "../Formik/Schemas";
 import TextError from "../Formik/TextError";
 
@@ -23,7 +24,7 @@ const EditRelease = ({ isOpen, setIsOpen }) => {
 
   useEffect(() => {
     setCurrentRelease(release);
-  }, []);
+  }, [currentRelease]);
 
   const onSubmit = async (values, onSubmitProps) => {
     await axios({
@@ -66,14 +67,7 @@ const EditRelease = ({ isOpen, setIsOpen }) => {
           initialValues={{
             releaseName: "",
             releaseDate: "",
-            dsps: [
-              { name: "Apple Music", url: "/a", image_url: "" },
-              { name: "SoundCloud", url: "/s", image_url: "" },
-              { name: "YouTube", url: "/y", image_url: "" },
-              { name: "Pandora", url: "/p", image_url: "" },
-              { name: "iHeartRadio", url: "/i", image_url: "" },
-              { name: "Tidal", url: "/t", image_url: "" },
-            ],
+            dsps: dspInitialValues.dsps,
           }}
           validateOnMount
           enableReinitialize
