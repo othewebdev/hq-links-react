@@ -41,7 +41,6 @@ const ReleaseForm = ({ artistList }) => {
         uploadPreset: "pjjkl9ai",
       },
       function (error, result) {
-        console.log(releaseFormDetails);
         if (!error) {
           setReleaseFormDetails({
             ...releaseFormDetails,

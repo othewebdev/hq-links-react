@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 const ReleaseCard = ({ release, user }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [openDeleteConfirm, setOpenDeleteConfirm] = useState(false);
+  const [openEditOptions, setOpenEditOptions] = useState(false);
   const { currentRelease, setCurrentRelease } = useContext(ReleaseContext);
   const navigate = useNavigate();
 
@@ -33,10 +34,7 @@ const ReleaseCard = ({ release, user }) => {
   };
 
   return (
-    <Link
-      to={`/release/${release.release.release_name}`}
-      state={{ release: release }}
-    >
+    <>
       <div className="release-card_outer">
         <div className="release-card_inner">
           <div className="release-card_left-column">
@@ -47,24 +45,53 @@ const ReleaseCard = ({ release, user }) => {
             <h3 className="heading">{release.release.release_name}</h3>
             <p>{moment(release.release.release_date).format("DD/MM/YYYY")}</p>
           </div>
-          <div className="release-card_right-column">
-            <Link to="/edit-release" state={{ release: release }}>
+          {openEditOptions ? (
+            <div className="release-card_right-column">
               <button
                 className="button-small"
-                // onClick={() => handleEditRelease()}
+                onClick={() => setOpenEditOptions(!openEditOptions)}
               >
-                Edit
+                -
               </button>
-            </Link>
-            {!openDeleteConfirm && (
+              <Link to="/edit-release" state={{ release: release }}>
+                <button
+                  className="button-small"
+                  // onClick={() => handleEditRelease()}
+                >
+                  Edit
+                </button>
+              </Link>
+
+              {!openDeleteConfirm && (
+                <button
+                  className="button-small"
+                  onClick={() => setOpenDeleteConfirm(true)}
+                >
+                  Delete
+                </button>
+              )}
+            </div>
+          ) : (
+            <div className="release-card_right-column">
               <button
                 className="button-small"
-                onClick={() => setOpenDeleteConfirm(true)}
+                onClick={() => setOpenEditOptions(true)}
               >
-                Delete
+                More
               </button>
-            )}
-          </div>
+              <Link
+                to={`/release/${release.release.release_name}`}
+                state={{ release: release }}
+              >
+                <button
+                  className="button-small"
+                  onClick={() => setOpenEditOptions(true)}
+                >
+                  Visit
+                </button>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
       {openDeleteConfirm && (
@@ -90,7 +117,7 @@ const ReleaseCard = ({ release, user }) => {
           </div>
         </Fade>
       )}
-    </Link>
+    </>
   );
 };
 

@@ -1,4 +1,4 @@
-import { ErrorMessage, Field, Form, Formik } from "formik";
+import { ErrorMessage, Field, FieldArray, Form, Formik } from "formik";
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ReleaseFormContext } from "../../App";
@@ -12,9 +12,10 @@ const DSPForm = () => {
     useContext(ReleaseFormContext);
 
   const onSubmit = (values, onSubmitProps) => {
+    console.log(values);
     setReleaseFormDetails({
       ...releaseFormDetails,
-      dsps: values,
+      dsps: values.dsps,
     });
     navigate("/finalize-release");
     onSubmitProps.setSubmitting(false);
@@ -24,15 +25,16 @@ const DSPForm = () => {
     <div>
       <Formik
         initialValues={{
-          appleUrl: "",
-          spotifyUrl: "",
-          soundcloudUrl: "",
-          youtubeUrl: "",
-          pandoraUrl: "",
-          iheartradioUrl: "",
-          tidalUrl: "",
+          dsps: [
+            { name: "Apple Music", url: "/a", image_url: "" },
+            { name: "SoundCloud", url: "/s", image_url: "" },
+            { name: "YouTube", url: "/y", image_url: "" },
+            { name: "Pandora", url: "/p", image_url: "" },
+            { name: "iHeartRadio", url: "/i", image_url: "" },
+            { name: "Tidal", url: "/t", image_url: "" },
+          ],
         }}
-        validationSchema={dspFormSchema}
+        // validationSchema={dspFormSchema}
         validateOnMount
         onSubmit={onSubmit}
         enableReinitialize
@@ -40,64 +42,22 @@ const DSPForm = () => {
         {(formik) => {
           return (
             <Form>
-              <div className="input-container">
-                <label htmlFor="appleUrl">Apple Music</label>
-                <Field name="appleUrl" type="text" placeholder="Enter a URL" />
-                <ErrorMessage name="appleUrl" component={TextError} />
-              </div>
-              <div className="input-container">
-                <label htmlFor="spotifyUrl">Spotify</label>
-                <Field
-                  name="spotifyUrl"
-                  type="text"
-                  placeholder="Enter a URL"
-                />
-                <ErrorMessage name="spotifyUrl" component={TextError} />
-              </div>
-              <div className="input-container">
-                <label htmlFor="soundcloudUrl">SoundCloud</label>
-                <Field
-                  name="soundcloudUrl"
-                  type="text"
-                  placeholder="Enter a URL"
-                />
-                <ErrorMessage name="soundcloudUrl" component={TextError} />
-              </div>
-              <div className="input-container">
-                <label htmlFor="youtubeUrl">YouTube</label>
-                <Field
-                  name="youtubeUrl"
-                  type="text"
-                  placeholder="Enter a URL"
-                />
-                <ErrorMessage name="youtubeUrl" component={TextError} />
-              </div>
-              <div className="input-container">
-                <label htmlFor="tidalUrl">Tidal</label>
-                <Field name="tidalUrl" type="text" placeholder="Enter a URL" />
-                <ErrorMessage name="tidalUrl" component={TextError} />
-              </div>
-              <div className="input-container">
-                <label htmlFor="pandoraUrl">Pandora</label>
-                <Field
-                  name="pandoraUrl"
-                  type="text"
-                  placeholder="Enter a URL"
-                />
-                <ErrorMessage name="pandoraUrl" component={TextError} />
-              </div>
-              <div className="input-container">
-                <label htmlFor="iheartradioUrl">iHeartRadio</label>
-                <Field
-                  name="iheartradioUrl"
-                  type="text"
-                  placeholder="Enter a URL"
-                />
-                <ErrorMessage name="iheartradioUrl" component={TextError} />
-              </div>
+              {formik.initialValues.dsps.map((dsp, i) => (
+                <div className="input-container">
+                  <label htmlFor={dsp.name}>{dsp.name}</label>
+                  <FieldArray>
+                    <Field
+                      name={dsp.url}
+                      type="text"
+                      placeholder="Enter a URL"
+                    />
+                  </FieldArray>
+                  <ErrorMessage name={dsp.name} component={TextError} />
+                </div>
+              ))}
+
               <button
                 type="submit"
-                className="button-small"
                 disabled={!formik.isValid || formik.isSubmitting}
               >
                 Submit

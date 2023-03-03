@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ErrorMessage, Field, Form, Formik } from "formik";
+import { ErrorMessage, Field, FieldArray, Form, Formik } from "formik";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import ReactDatePicker from "react-datepicker";
@@ -66,17 +66,14 @@ const EditRelease = ({ isOpen, setIsOpen }) => {
           initialValues={{
             releaseName: "",
             releaseDate: "",
-            dsps: {
-              urls: [
-                { appleUrl: "" },
-                { iheartRadioUrl: "" },
-                { pandoraUrl: "" },
-                { soundcloudUrl: "" },
-                { spotifyUrl: "" },
-                { tidalUrl: "" },
-                { youtubeUrl: "" },
-              ],
-            },
+            dsps: [
+              { name: "Apple Music", url: "/a", image_url: "" },
+              { name: "SoundCloud", url: "/s", image_url: "" },
+              { name: "YouTube", url: "/y", image_url: "" },
+              { name: "Pandora", url: "/p", image_url: "" },
+              { name: "iHeartRadio", url: "/i", image_url: "" },
+              { name: "Tidal", url: "/t", image_url: "" },
+            ],
           }}
           validateOnMount
           enableReinitialize
@@ -121,154 +118,28 @@ const EditRelease = ({ isOpen, setIsOpen }) => {
                     </Field>
                     <ErrorMessage name="releaseDate" component={TextError} />
                   </div>
-                  <ReactImageUploading
-                    multiple
-                    value={previewImage}
-                    onChange={onChange}
-                    maxNumber={maxNumber}
-                    dataURLKey="data_url"
-                  >
-                    {({
-                      imageList,
-                      onImageUpload,
-                      onImageUpdate,
-                      isDragging,
-                      dragProps,
-                    }) => (
-                      <div
-                        className="upload__image-wrapper"
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                        }}
-                      >
-                        {previewImage.length === 0 && (
-                          <button
-                            style={
-                              (isDragging ? { color: "red" } : undefined,
-                              { margin: "18px 0" })
-                            }
-                            onClick={onImageUpload}
-                            {...dragProps}
-                            className="button-small"
-                          >
-                            Choose Image...
-                          </button>
-                        )}
-                        &nbsp;
-                        {imageList.map((image, index) => (
-                          <div
-                            key={index}
-                            className="image-item"
-                            style={{ margin: "36px 0" }}
-                          >
-                            <div className="release_image-container">
-                              <img src={image["data_url"]} alt="" width="550" />
-                            </div>
-                            <div className="button-container">
-                              <button
-                                className="button-small"
-                                onClick={() => onImageUpdate(index)}
-                              >
-                                Browse...
-                              </button>
-                              <button
-                                className="button-small"
-                                // onClick={() => onFinalImageUpload(image.data_url)}
-                              >
-                                Upload
-                              </button>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </ReactImageUploading>
                 </div>
                 <div className="edit-release_links">
                   <h3 className="heading-small">Links</h3>
-                  {/* Apple music */}
-                  <div className="input-container">
-                    <label>Apple Music</label>
-                    <Field
-                      name="appleUrl"
-                      type="text"
-                      placeholder="Enter a URL"
-                    />
-                    <ErrorMessage name="appleUrl" component={TextError} />
-                  </div>
-                  {/* Spotify */}
-                  <div className="input-container">
-                    <label>Spotify</label>
-                    <Field
-                      name="appleUrl"
-                      type="text"
-                      placeholder="Enter a URL"
-                    />
-                    <ErrorMessage name="spotifyUrl" component={TextError} />
-                  </div>
-                  {/* SoundCloud */}
-                  <div className="input-container">
-                    <label>SoundCloud</label>
-                    <Field
-                      name="soundcloudUrl"
-                      type="text"
-                      placeholder="Enter a URL"
-                    />
-                    <ErrorMessage name="soundcloudUrl" component={TextError} />
-                  </div>
-                  {/* YouTube */}
-                  <div className="input-container">
-                    <label>YouTube</label>
-                    <Field
-                      name="youtubeUrl"
-                      type="text"
-                      placeholder="Enter a URL"
-                    />
-                    <ErrorMessage name="youtubeUrl" component={TextError} />
-                  </div>
-                  {/* Tidal */}
-                  <div className="input-container">
-                    <label>Tidal</label>
-                    <Field
-                      name="tidalUrl"
-                      type="text"
-                      placeholder="Enter a URL"
-                    />
-                    <ErrorMessage name="tidalUrl" component={TextError} />
-                  </div>
-                  {/* Pandora */}
-                  <div className="input-container">
-                    <label>Pandora</label>
-                    <Field
-                      name="pandoraUrl"
-                      type="text"
-                      placeholder="Enter a URL"
-                    />
-                    <ErrorMessage name="pandoraUrl" component={TextError} />
-                  </div>
-                  {/* iHeartRadio */}
-                  <div className="input-container">
-                    <label>iHeartRadio</label>
-                    <Field
-                      name="iheartradioUrl"
-                      type="text"
-                      placeholder="Enter a URL"
-                    />
-                    <ErrorMessage name="iheartradioUrl" component={TextError} />
-                  </div>
+                  {formik.initialValues.dsps.map((dsp, i) => (
+                    <div className="input-container">
+                      <label htmlFor={dsp.name}>{dsp.name}</label>
+                      <FieldArray>
+                        <Field
+                          name={dsp.url}
+                          type="text"
+                          placeholder="Enter a URL"
+                        />
+                      </FieldArray>
+                      <ErrorMessage name={dsp.name} component={TextError} />
+                    </div>
+                  ))}
+
                   <button
-                    className="button-small"
-                    disabled={!formik.isValid || formik.isSubmitting}
                     type="submit"
+                    disabled={!formik.isValid || formik.isSubmitting}
                   >
-                    Finish{" "}
-                  </button>
-                  <button
-                    className="button-small"
-                    onClick={() => setIsOpen(!isOpen)}
-                  >
-                    Close
+                    Submit
                   </button>
                 </div>
               </Form>
