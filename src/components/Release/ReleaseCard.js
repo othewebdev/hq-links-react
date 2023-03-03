@@ -1,14 +1,23 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import EditRelease from "./EditRelease";
 import moment from "moment";
 import { Fade } from "react-reveal";
 
 import "./ReleaseCard.scss";
+import { ReleaseContext } from "../../App";
+import { useNavigate } from "react-router";
 
 const ReleaseCard = ({ release, user }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [openDeleteConfirm, setOpenDeleteConfirm] = useState(false);
+  const { currentRelease, setCurrentRelease } = useContext(ReleaseContext);
+  const navigate = useNavigate();
+
+  const handleEditRelease = () => {
+    setCurrentRelease(release);
+    navigate("/edit-release");
+  };
 
   const deleteRelease = async () => {
     await axios({
@@ -35,16 +44,9 @@ const ReleaseCard = ({ release, user }) => {
             <p>{moment(release.release.release_date).format("DD/MM/YYYY")}</p>
           </div>
           <div className="release-card_right-column">
-            <Fade>
-              <EditRelease
-                setIsOpen={setIsModalOpen}
-                isOpen={isModalOpen}
-                release={release}
-              />
-            </Fade>
             <button
               className="button-small"
-              onClick={() => setIsModalOpen(!isModalOpen)}
+              onClick={() => handleEditRelease()}
             >
               Edit
             </button>

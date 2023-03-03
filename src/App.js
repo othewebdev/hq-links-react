@@ -5,14 +5,15 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 
 import axios from "axios";
+import Layout from "./components/Layout/Layout";
 import "./global.scss";
 import AddDSPsPage from "./pages/AddDSPsPage";
+import AddLinkPage from "./pages/AddLinkPage";
 import AddReleasePage from "./pages/AddReleasePage";
 import ReleasePreviewPage from "./pages/ReleasePreviewPage";
-import Navbar from "./components/Navbar/Navbar";
-import AddLinkPage from "./pages/AddLinkPage";
-import Layout from "./components/Layout/Layout";
+import EditReleasePage from "./pages/EditReleasePage";
 
+export const ReleaseContext = createContext();
 export const UserContext = createContext();
 export const ArtistListContext = createContext({
   isSubmitted: false,
@@ -21,6 +22,7 @@ export const ReleaseFormContext = createContext();
 
 function App() {
   const [user, setUser] = useState(null);
+  const [currentRelease, setCurrentRelease] = useState({});
   const [artistList, setArtistList] = useState([]);
   const [releaseFormDetails, setReleaseFormDetails] = useState([]);
 
@@ -49,26 +51,30 @@ function App() {
         <ReleaseFormContext.Provider
           value={{ releaseFormDetails, setReleaseFormDetails }}
         >
-          <Routes>
-            <Route path="*" element={<Navigate to="/login" replace />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/" element={<Navigate to="/admin" replace />} />
-            <Route path="/" element={<Layout />}>
-              <Route
-                path="/add-release"
-                element={<AddReleasePage artistList={artistList} />}
-              />
-              <Route path="/new-link" element={<AddLinkPage />} />
-              <Route
-                path="/finalize-release"
-                element={<ReleasePreviewPage />}
-              />
-              <Route path="/add-links" element={<AddDSPsPage />} />
-
-              <Route path="/register" element={<RegisterPage />} />
-              <Route path="/admin" element={<Dashboard />} />
-            </Route>
-          </Routes>
+          <ReleaseContext.Provider
+            value={{ currentRelease, setCurrentRelease }}
+          >
+            <Routes>
+              <Route path="*" element={<Navigate to="/login" replace />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/" element={<Navigate to="/admin" replace />} />
+              <Route path="/" element={<Layout />}>
+                <Route
+                  path="/add-release"
+                  element={<AddReleasePage artistList={artistList} />}
+                />
+                <Route path="/new-link" element={<AddLinkPage />} />
+                <Route
+                  path="/finalize-release"
+                  element={<ReleasePreviewPage />}
+                />
+                <Route path="/add-links" element={<AddDSPsPage />} />
+                <Route path="/edit-release" element={<EditReleasePage />} />
+                <Route path="/register" element={<RegisterPage />} />
+                <Route path="/admin" element={<Dashboard />} />
+              </Route>
+            </Routes>
+          </ReleaseContext.Provider>
         </ReleaseFormContext.Provider>
       </UserContext.Provider>
     </div>

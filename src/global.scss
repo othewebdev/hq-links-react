@@ -99,6 +99,11 @@ select {
   height: 100%;
 }
 
+.page-col {
+  @extend .page;
+  flex-direction: column;
+}
+
 .heading {
   &::first-letter {
     text-transform: capitalize;

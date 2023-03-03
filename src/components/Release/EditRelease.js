@@ -3,7 +3,7 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import ReactDatePicker from "react-datepicker";
-import ReactModal from "react-modal";
+import ReactImageUploading from "react-images-uploading";
 import { editReleaseFormSchema } from "../Formik/Schemas";
 import TextError from "../Formik/TextError";
 
@@ -11,11 +11,17 @@ import "./EditRelease.scss";
 
 const EditRelease = ({ release, isOpen, setIsOpen }) => {
   const [currentRelease, setCurrentRelease] = useState({});
+  const [previewImage, setPreviewImage] = useState([]);
+
+  const maxNumber = 1;
+  const onChange = (imageList) => {
+    setPreviewImage(imageList);
+  };
+
   useEffect(() => {
     const getCurrentRelease = async () => {
       await axios({
         method: "GET",
-
         url: `https://hq-links-api-2.vercel.app/releases/${release.artist_name}/${release._id}`,
       })
         .then((res) => {
@@ -24,12 +30,11 @@ const EditRelease = ({ release, isOpen, setIsOpen }) => {
         .catch((err) => console.log(err.message));
     };
     getCurrentRelease();
-  }, [isOpen]);
+  }, []);
 
   const onSubmit = async (values, onSubmitProps) => {
     await axios({
       method: "PATCH",
-
       url: `https://hq-links-api-2.vercel.app/releases/${release.artist_name}/${release._id}`,
       data: {
         release: {
@@ -62,8 +67,8 @@ const EditRelease = ({ release, isOpen, setIsOpen }) => {
   };
 
   return (
-    <div className="edit-modal_container">
-      <ReactModal className="edit-modal" isOpen={isOpen}>
+    <>
+      <div className="edit-release-panel">
         <Formik
           initialValues={{
             releaseName: "",
@@ -87,41 +92,108 @@ const EditRelease = ({ release, isOpen, setIsOpen }) => {
         >
           {(formik) => {
             return (
-              <Form>
-                <h3 className="heading">Edit {release.release.release_name}</h3>
-                <div className="input-container">
-                  <label>Release Name</label>
-                  <Field
-                    name="releaseName"
-                    type="text"
-                    placeholder={release.release.release_name}
-                  />
-                  <ErrorMessage name="releaseName" component={TextError} />
+              <Form className="edit-release_inner-panel">
+                <div className="edit-release_release">
+                  <h3 className="heading-small">Edit Your Release</h3>
+                  <div className="input-container">
+                    <label>Release Name</label>
+                    <Field
+                      name="releaseName"
+                      type="text"
+                      placeholder={release.release.release_name}
+                    />
+                    <ErrorMessage name="releaseName" component={TextError} />
+                  </div>
+                  <div className="input-container">
+                    <label>Release Date</label>
+                    <Field name="releaseDate">
+                      {({ form, field }) => {
+                        const { setFieldValue } = form;
+                        const { value } = field;
+                        return (
+                          <ReactDatePicker
+                            onKeyDown={handleOnKeydown}
+                            id="releaseDate"
+                            {...field}
+                            selected={value}
+                            placeholderText={moment(
+                              release.release.release_date
+                            ).format("DD/MM/YYYY")}
+                            onChange={(val) =>
+                              setFieldValue("releaseDate", val)
+                            }
+                          />
+                        );
+                      }}
+                    </Field>
+                    <ErrorMessage name="releaseDate" component={TextError} />
+                  </div>
+                  <ReactImageUploading
+                    multiple
+                    value={previewImage}
+                    onChange={onChange}
+                    maxNumber={maxNumber}
+                    dataURLKey="data_url"
+                  >
+                    {({
+                      imageList,
+                      onImageUpload,
+                      onImageUpdate,
+                      isDragging,
+                      dragProps,
+                    }) => (
+                      <div
+                        className="upload__image-wrapper"
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                        }}
+                      >
+                        {previewImage.length === 0 && (
+                          <button
+                            style={
+                              (isDragging ? { color: "red" } : undefined,
+                              { margin: "18px 0" })
+                            }
+                            onClick={onImageUpload}
+                            {...dragProps}
+                            className="button-small"
+                          >
+                            Choose Image...
+                          </button>
+                        )}
+                        &nbsp;
+                        {imageList.map((image, index) => (
+                          <div
+                            key={index}
+                            className="image-item"
+                            style={{ margin: "36px 0" }}
+                          >
+                            <div className="release_image-container">
+                              <img src={image["data_url"]} alt="" width="550" />
+                            </div>
+                            <div className="button-container">
+                              <button
+                                className="button-small"
+                                onClick={() => onImageUpdate(index)}
+                              >
+                                Browse...
+                              </button>
+                              <button
+                                className="button-small"
+                                // onClick={() => onFinalImageUpload(image.data_url)}
+                              >
+                                Upload
+                              </button>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </ReactImageUploading>
                 </div>
-                <div className="input-container">
-                  <label>Release Date</label>
-                  <Field name="releaseDate">
-                    {({ form, field }) => {
-                      const { setFieldValue } = form;
-                      const { value } = field;
-                      return (
-                        <ReactDatePicker
-                          onKeyDown={handleOnKeydown}
-                          id="releaseDate"
-                          {...field}
-                          selected={value}
-                          placeholderText={moment(
-                            release.release.release_date
-                          ).format("DD/MM/YYYY")}
-                          onChange={(val) => setFieldValue("releaseDate", val)}
-                        />
-                      );
-                    }}
-                  </Field>
-                  <ErrorMessage name="releaseDate" component={TextError} />
-                </div>
-                <div>
-                  <h3 className="heading">Links</h3>
+                <div className="edit-release_links">
+                  <h3 className="heading-small">Links</h3>
                   {/* Apple music */}
                   <div className="input-container">
                     <label>Apple Music</label>
@@ -192,26 +264,27 @@ const EditRelease = ({ release, isOpen, setIsOpen }) => {
                     />
                     <ErrorMessage name="iheartradioUrl" component={TextError} />
                   </div>
+                  <button
+                    className="button-small"
+                    disabled={!formik.isValid || formik.isSubmitting}
+                    type="submit"
+                  >
+                    Finish{" "}
+                  </button>
+                  <button
+                    className="button-small"
+                    onClick={() => setIsOpen(!isOpen)}
+                  >
+                    Close
+                  </button>
                 </div>
-                <button
-                  className="button-small"
-                  disabled={!formik.isValid || formik.isSubmitting}
-                  type="submit"
-                >
-                  Finish{" "}
-                </button>
-                <button
-                  className="button-small"
-                  onClick={() => setIsOpen(!isOpen)}
-                >
-                  Close
-                </button>
               </Form>
             );
           }}
         </Formik>
-      </ReactModal>
-    </div>
+      </div>
+      <div className="edit-release-panel"></div>
+    </>
   );
 };
 
