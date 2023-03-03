@@ -7,6 +7,7 @@ import { Fade } from "react-reveal";
 import "./ReleaseCard.scss";
 import { ReleaseContext } from "../../App";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
 const ReleaseCard = ({ release, user }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -14,10 +15,10 @@ const ReleaseCard = ({ release, user }) => {
   const { currentRelease, setCurrentRelease } = useContext(ReleaseContext);
   const navigate = useNavigate();
 
-  const handleEditRelease = () => {
-    setCurrentRelease(release);
-    navigate("/edit-release");
-  };
+  // const handleEditRelease = () => {
+  //   setCurrentRelease(release);
+  //   navigate("/edit-release");
+  // };
 
   const deleteRelease = async () => {
     await axios({
@@ -32,7 +33,10 @@ const ReleaseCard = ({ release, user }) => {
   };
 
   return (
-    <>
+    <Link
+      to={`/release/${release.release.release_name}`}
+      state={{ release: release }}
+    >
       <div className="release-card_outer">
         <div className="release-card_inner">
           <div className="release-card_left-column">
@@ -44,12 +48,14 @@ const ReleaseCard = ({ release, user }) => {
             <p>{moment(release.release.release_date).format("DD/MM/YYYY")}</p>
           </div>
           <div className="release-card_right-column">
-            <button
-              className="button-small"
-              onClick={() => handleEditRelease()}
-            >
-              Edit
-            </button>
+            <Link to="/edit-release" state={{ release: release }}>
+              <button
+                className="button-small"
+                // onClick={() => handleEditRelease()}
+              >
+                Edit
+              </button>
+            </Link>
             {!openDeleteConfirm && (
               <button
                 className="button-small"
@@ -84,7 +90,7 @@ const ReleaseCard = ({ release, user }) => {
           </div>
         </Fade>
       )}
-    </>
+    </Link>
   );
 };
 

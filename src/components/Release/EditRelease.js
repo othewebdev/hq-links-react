@@ -4,14 +4,17 @@ import moment from "moment";
 import React, { useEffect, useState } from "react";
 import ReactDatePicker from "react-datepicker";
 import ReactImageUploading from "react-images-uploading";
+import { useLocation } from "react-router-dom";
 import { editReleaseFormSchema } from "../Formik/Schemas";
 import TextError from "../Formik/TextError";
 
 import "./EditRelease.scss";
 
-const EditRelease = ({ release, isOpen, setIsOpen }) => {
+const EditRelease = ({ isOpen, setIsOpen }) => {
   const [currentRelease, setCurrentRelease] = useState({});
   const [previewImage, setPreviewImage] = useState([]);
+  const location = useLocation();
+  const { release } = location.state;
 
   const maxNumber = 1;
   const onChange = (imageList) => {
@@ -19,17 +22,7 @@ const EditRelease = ({ release, isOpen, setIsOpen }) => {
   };
 
   useEffect(() => {
-    const getCurrentRelease = async () => {
-      await axios({
-        method: "GET",
-        url: `https://hq-links-api-2.vercel.app/releases/${release.artist_name}/${release._id}`,
-      })
-        .then((res) => {
-          setCurrentRelease(res.data);
-        })
-        .catch((err) => console.log(err.message));
-    };
-    getCurrentRelease();
+    setCurrentRelease(release);
   }, []);
 
   const onSubmit = async (values, onSubmitProps) => {

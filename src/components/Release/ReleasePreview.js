@@ -23,8 +23,6 @@ const ReleasePreview = () => {
   }, []);
 
   const postToApi = async () => {
-    console.log(releaseFormDetails.image);
-
     await axios({
       method: "POST",
       url: "https://hq-links-api-2.vercel.app/releases",
@@ -37,9 +35,8 @@ const ReleasePreview = () => {
         artist_name: releaseFormDetails.artist,
         release: {
           release_name: releaseFormDetails.releaseName,
-          release_date: releaseFormDetails.releaseDate.toLocaleDateString(),
-          release_image_url:
-            "https://stackoverflow.com/questions/50614397/value-of-the-access-control-allow-origin-header-in-the-response-must-not-be-th",
+          release_date: releaseFormDetails.releaseDate,
+          release_image_url: releaseFormDetails.image,
         },
         dsps: {
           urls: [releaseFormDetails.dsps],
@@ -55,6 +52,7 @@ const ReleasePreview = () => {
       <div>
         <h3>Here's Your Release!</h3>
         <img
+          className="release-preview-image"
           src={releaseFormDetails.image}
           alt={releaseFormDetails.releaseName}
         />
