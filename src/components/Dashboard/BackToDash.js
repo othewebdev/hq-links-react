@@ -6,8 +6,9 @@ const BackToDash = () => {
   const handleBackToDashboard = () => {
     navigate("/admin");
   };
+
   return (
-    <div>
+    <div style={{ zIndex: 3, padding: "12px 0" }}>
       <p className="p-link" onClick={handleBackToDashboard}>
         ← Dashboard
       </p>

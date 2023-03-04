@@ -1,14 +1,14 @@
 import React, { useContext } from "react";
 import { ReleaseContext } from "../App";
 import BackToDash from "../components/Dashboard/BackToDash";
-import EditRelease from "../components/Release/EditRelease";
+
+import PreviewEdit from "../components/Release/Edit/PreviewEdit";
 
 const EditReleasePage = () => {
   const { currentRelease } = useContext(ReleaseContext);
   return (
     <div className="page-col">
-      <BackToDash />
-      <EditRelease release={currentRelease} />
+      <PreviewEdit release={currentRelease} />
     </div>
   );
 };

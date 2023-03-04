@@ -53,7 +53,7 @@ const ReleaseForm = ({ artistList }) => {
         }
       }
     );
-  }, [chosenImage]);
+  }, [releaseFormDetails]);
 
   const onSubmit = (values) => {
     setReleaseFormDetails({

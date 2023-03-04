@@ -2,11 +2,11 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import BackToDash from "../../Dashboard/BackToDash";
-import Release from "./Release";
+import EditRelease from "./EditRelease";
 
-import "./Release.scss";
+import "./Edit.scss";
 
-const PreviewRelease = () => {
+const PreviewEdit = () => {
   const location = useLocation();
   const { release } = location.state;
   const localStorageUser = window.localStorage.getItem("APP_USER");
@@ -35,9 +35,9 @@ const PreviewRelease = () => {
       }}
     >
       {localStorageUser && <BackToDash />}
-      <Release release={release} />
+      <EditRelease release={release} />
     </div>
   );
 };
 
-export default PreviewRelease;
+export default PreviewEdit;

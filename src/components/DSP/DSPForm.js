@@ -18,17 +18,82 @@ const DSPForm = () => {
   const onSubmit = (values, onSubmitProps) => {
     setReleaseFormDetails({
       ...releaseFormDetails,
-      dsps: { ...values.dsps },
+      dsps: values,
     });
     console.log(releaseFormDetails);
     navigate("/finalize-release");
     onSubmitProps.setSubmitting(false);
   };
 
+  //  "dsp.appleMusic": "",
+  //         "dsp.spotify": "",
+  //         "dsp.soundcloud": "",
+  //         "dsp.youtube": "",
+  //         "dsp.pandora": "",
+  //         "dsp.iheartradio": "",
+  //         "dsp.tidal": "",
+  //         "dsp.images": [
+  //           "https://services.linkfire.com/logo_applemusic_onlight.svg",
+  //           "https://services.linkfire.com/logo_spotify_onlight.svg",
+  //           "https://services.linkfire.com/logo_soundcloud_onlight.svg",
+  //           "https://services.linkfire.com/logo_youtube_onlight.svg",
+  //           "https://services.linkfire.com/logo_pandora_onlight.svg",
+  //           "https://services.linkfire.com/logo_iheartradio_onlight.svg",
+  //           "https://services.linkfire.com/logo_tidal_onlight.svg",
+  //         ],
+  //         "dsp.names": [
+  //           "Apple Music",
+  //           "Spotify",
+  //           "SoundCloud",
+  //           "YouTube",
+  //           "Pandora",
+  //           "iHeartRadio",
+  //           "Tidal",
+  //         ],
+
   return (
     <div>
       <Formik
-        initialValues={dspInitialValues}
+        initialValues={{
+          apple: {
+            name: "Apple Music",
+            url: "",
+            image_url:
+              "https://services.linkfire.com/logo_applemusic_onlight.svg",
+          },
+          spotify: {
+            name: "Spotify",
+            url: "",
+            image_url: "https://services.linkfire.com/logo_spotify_onlight.svg",
+          },
+          soundcloud: {
+            name: "SoundCloud",
+            url: "",
+            image_url:
+              "https://services.linkfire.com/logo_soundcloud_onlight.svg",
+          },
+          youtube: {
+            name: "YouTube",
+            url: "",
+            image_url: "https://services.linkfire.com/logo_youtube_onlight.svg",
+          },
+          pandora: {
+            name: "Pandora",
+            url: "",
+            image_url: "https://services.linkfire.com/logo_pandora_onlight.svg",
+          },
+          iheartradio: {
+            name: "iHeartRadio",
+            url: "",
+            image_url:
+              "https://services.linkfire.com/logo_iheartradio_onlight.svg",
+          },
+          tidal: {
+            name: "Tidal",
+            url: "",
+            image_url: "https://services.linkfire.com/logo_tidal_onlight.svg",
+          },
+        }}
         // validationSchema={dspFormSchema}
         validateOnMount
         onSubmit={onSubmit}
@@ -37,20 +102,34 @@ const DSPForm = () => {
         {(formik) => {
           return (
             <Form>
-              {formik.initialValues.dsps.map((dsp, i) => (
-                <div className="input-container">
-                  <label htmlFor={dsp.name}>{dsp.name}</label>
-                  <FieldArray name="dsps">
-                    <Field
-                      name={dsp.url}
-                      type="text"
-                      placeholder="Enter a URL"
-                    />
-                  </FieldArray>
-                  <ErrorMessage name={dsp.name} component={TextError} />
-                </div>
-              ))}
-
+              <div className="input-container">
+                <label>Apple Music</label>
+                <Field name="apple.url" placeholder="Enter a URL" />
+              </div>
+              <div className="input-container">
+                <label>Spotify</label>
+                <Field name="spotify.url" placeholder="Enter a URL" />
+              </div>
+              <div className="input-container">
+                <label>SoundCloud</label>
+                <Field name="soundcloud.url" placeholder="Enter a URL" />
+              </div>
+              <div className="input-container">
+                <label>YouTube</label>
+                <Field name="youtube.url" placeholder="Enter a URL" />
+              </div>
+              <div className="input-container">
+                <label>Pandora</label>
+                <Field name="pandora.url" placeholder="Enter a URL" />
+              </div>
+              <div className="input-container">
+                <label>iHeartRadio</label>
+                <Field name="iheartradio.url" placeholder="Enter a URL" />
+              </div>
+              <div className="input-container">
+                <label>Tidal</label>
+                <Field name="tidal.url" placeholder="Enter a URL" />
+              </div>
               <button
                 type="submit"
                 disabled={!formik.isValid || formik.isSubmitting}

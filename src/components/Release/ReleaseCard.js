@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useContext, useState } from "react";
-import EditRelease from "./EditRelease";
 import moment from "moment";
 import { Fade } from "react-reveal";
 
