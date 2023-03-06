@@ -23,7 +23,6 @@ const ReleasePreview = () => {
   }, []);
 
   const postToApi = async () => {
-    console.log(releaseFormDetails);
     await axios({
       method: "POST",
       url: "https://hq-links-api-2.vercel.app/releases",

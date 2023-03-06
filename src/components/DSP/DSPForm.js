@@ -1,16 +1,12 @@
-import { ErrorMessage, Field, FieldArray, Form, Formik } from "formik";
-import React, { useContext, useState } from "react";
+import { Field, Form, Formik } from "formik";
+import React, { useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ReleaseFormContext } from "../../App";
-import { dspInitialValues } from "../Formik/InitialValues";
-import { dspFormSchema } from "../Formik/Schemas";
-import TextError from "../Formik/TextError";
 
 const DSPForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { release } = location.state;
-  console.log(release);
 
   const { releaseFormDetails, setReleaseFormDetails } =
     useContext(ReleaseFormContext);
@@ -20,36 +16,9 @@ const DSPForm = () => {
       ...releaseFormDetails,
       dsps: values,
     });
-    console.log(releaseFormDetails);
     navigate("/finalize-release");
     onSubmitProps.setSubmitting(false);
   };
-
-  //  "dsp.appleMusic": "",
-  //         "dsp.spotify": "",
-  //         "dsp.soundcloud": "",
-  //         "dsp.youtube": "",
-  //         "dsp.pandora": "",
-  //         "dsp.iheartradio": "",
-  //         "dsp.tidal": "",
-  //         "dsp.images": [
-  //           "https://services.linkfire.com/logo_applemusic_onlight.svg",
-  //           "https://services.linkfire.com/logo_spotify_onlight.svg",
-  //           "https://services.linkfire.com/logo_soundcloud_onlight.svg",
-  //           "https://services.linkfire.com/logo_youtube_onlight.svg",
-  //           "https://services.linkfire.com/logo_pandora_onlight.svg",
-  //           "https://services.linkfire.com/logo_iheartradio_onlight.svg",
-  //           "https://services.linkfire.com/logo_tidal_onlight.svg",
-  //         ],
-  //         "dsp.names": [
-  //           "Apple Music",
-  //           "Spotify",
-  //           "SoundCloud",
-  //           "YouTube",
-  //           "Pandora",
-  //           "iHeartRadio",
-  //           "Tidal",
-  //         ],
 
   return (
     <div>
@@ -94,7 +63,6 @@ const DSPForm = () => {
             image_url: "https://services.linkfire.com/logo_tidal_onlight.svg",
           },
         }}
-        // validationSchema={dspFormSchema}
         validateOnMount
         onSubmit={onSubmit}
         enableReinitialize

@@ -1,15 +1,5 @@
 import * as yup from "yup";
 
-const dspRules = new RegExp(
-  "(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?"
-);
-
-export const dspFormSchema = yup.array().of(
-  yup.object().shape({
-    url: yup.string().required("Please enter a name"),
-  })
-);
-
 export const releaseFormSchema = yup.object().shape({
   releaseName: yup
     .string()

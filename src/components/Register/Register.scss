@@ -1,3 +1,20 @@
 .registerForm {
-  background-color: aliceblue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  h3 {
+    text-align: center;
+  }
+  .inputContainer {
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    margin: 6px 0;
+    label {
+      font-size: 16px;
+      margin: 4px 0;
+    }
+  }
 }

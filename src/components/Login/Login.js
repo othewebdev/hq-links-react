@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import "./Login.scss";
 
@@ -75,7 +75,14 @@ const Login = () => {
 
   return (
     <div className="loginForm">
-      <h2 className="heading">HQ Links</h2>
+      <Link to="/">
+        <img
+          src="https://res.cloudinary.com/dhnlz1f7q/image/upload/v1678118217/rxhs1f6pyhfkr62iubzj.png"
+          alt=""
+          width={64}
+        />
+      </Link>
+      <h3 className="heading">Login</h3>
       <div className="input-container">
         <label htmlFor="Username">Username</label>
         <input
@@ -100,6 +107,14 @@ const Login = () => {
       <button className="button" onClick={loginExistingUser} type="submit">
         Login
       </button>
+      <div>
+        <p>Don't have an account yet?</p>
+        <Link to="/register">Create one now</Link>
+      </div>
+      <div>
+        <p>Forgot your password?</p>
+        <Link to="/register">Reset your password</Link>
+      </div>
     </div>
   );
 };

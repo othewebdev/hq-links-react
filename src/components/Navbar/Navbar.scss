@@ -4,8 +4,7 @@
   justify-content: space-between;
   background-color: #fff;
   height: 60px;
-  margin: 12px 0;
-  padding: 0 48px;
+  padding: 36px 48px;
 }
 
 .nav-left-column {
@@ -14,7 +13,9 @@
 
 .nav-links-container {
   ul {
+    height: 100%;
     display: flex;
+    align-items: center;
   }
   svg path {
     transition: 0.2s ease all;
@@ -38,6 +39,11 @@
       transition: 0.2s ease all;
     }
   }
+}
+
+.nav-logo-container {
+  display: flex;
+  align-items: center;
 }
 
 .nav-profile-container {

@@ -9,8 +9,10 @@ const ProfileDropdown = ({ currentUser }) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    window.localStorage.removeItem("APP_USER");
-    navigate("/login");
+    setTimeout(() => {
+      window.localStorage.removeItem("APP_USER");
+      navigate("/");
+    }, 1400);
   };
 
   return (

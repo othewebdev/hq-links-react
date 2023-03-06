@@ -13,6 +13,7 @@ import AddReleasePage from "./pages/AddReleasePage";
 import ReleasePreviewPage from "./pages/ReleasePreviewPage";
 import EditReleasePage from "./pages/EditReleasePage";
 import PreviewRelease from "./components/Release/Preview/PreviewRelease";
+import LandingPage from "./pages/LandingPage";
 
 export const ReleaseContext = createContext();
 export const UploadImageContext = createContext();
@@ -61,8 +62,9 @@ function App() {
               value={[uploadedImage, setUploadedImage]}
             >
               <Routes>
-                <Route path="*" element={<Navigate to="/login" replace />} />
+                <Route path="/" element={<LandingPage />} />
                 <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<RegisterPage />} />
                 <Route
                   path="/release/:release_name"
                   element={<PreviewRelease />}
@@ -80,7 +82,6 @@ function App() {
                   />
                   <Route path="/add-links" element={<AddDSPsPage />} />
                   <Route path="/edit-release" element={<EditReleasePage />} />
-                  <Route path="/register" element={<RegisterPage />} />
                   <Route path="/admin" element={<Dashboard />} />
                 </Route>
               </Routes>

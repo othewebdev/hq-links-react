@@ -14,7 +14,13 @@ const Navbar = () => {
     <nav className="nav">
       <div className="nav-left-column">
         <div className="nav-logo-container">
-          <img alt="Logo" />
+          <Link to="/">
+            <img
+              alt="Logo"
+              width={64}
+              src="https://res.cloudinary.com/dhnlz1f7q/image/upload/v1678118217/rxhs1f6pyhfkr62iubzj.png"
+            />
+          </Link>
         </div>
         <div className="nav-links-container">
           <ul>
