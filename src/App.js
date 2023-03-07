@@ -14,6 +14,7 @@ import ReleasePreviewPage from "./pages/ReleasePreviewPage";
 import EditReleasePage from "./pages/EditReleasePage";
 import PreviewRelease from "./components/Release/Preview/PreviewRelease";
 import LandingPage from "./pages/LandingPage";
+import LinksPage from "./pages/web/LinksPage";
 
 export const ReleaseContext = createContext();
 export const UploadImageContext = createContext();
@@ -63,6 +64,7 @@ function App() {
             >
               <Routes>
                 <Route path="/" element={<LandingPage />} />
+                <Route path="/links" element={<LinksPage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
                 <Route

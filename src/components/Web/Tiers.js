@@ -5,24 +5,34 @@ import "./Section.scss";
 const Tiers = () => {
   const tiers = [
     {
-      name: "Tier 1 Name",
+      name: "Individual",
       price: 4.99,
-      benefits: ["Benefit 1", "Benefit 2"],
+      benefits: [
+        "Unlimited release links",
+        "Unlimited bio links",
+        "Add a custom domain",
+        "Standard analytics package",
+      ],
     },
     {
-      name: "Tier 2 Name",
+      name: "Pro",
       price: 9.99,
-      benefits: ["Benefit 1", "Benefit 2", "Benefit 3"],
+      benefits: [
+        "All Individual benefits",
+        "Unlimited pre-release links",
+        "Unlimited content links",
+        "QR Code for every release",
+      ],
     },
     {
-      name: "Tier 3 Name",
+      name: "Supreme",
       price: 19.99,
       benefits: [
-        "Benefit 1",
-        "Benefit 2",
-        "Benefit 3",
-        "Benefit 4",
-        "Benefit 5",
+        "All Pro benefits",
+        "Add 10 users to your team",
+        "Board insight analytics package",
+        "Excel report export (XLS, CSV)",
+        "Email campaigns",
       ],
     },
   ];
@@ -30,17 +40,20 @@ const Tiers = () => {
     <div className="section-container">
       <p>Still not convinced?</p>
       <h2>See our pricing tiers</h2>
-      {tiers.map((tier) => (
-        <div>
-          <h3>{tier.name}</h3>
-          <h2>${tier.price}</h2>
-          <ul>
-            {tier.benefits.map((benefit) => (
-              <li>{benefit}</li>
-            ))}
-          </ul>
-        </div>
-      ))}
+      <div className="tier-container">
+        {tiers.map((tier) => (
+          <div className="tier-card">
+            <h3>{tier.name}</h3>
+            <ul>
+              {tier.benefits.map((benefit) => (
+                <li>{benefit}</li>
+              ))}
+            </ul>
+            <h2>${tier.price}</h2>
+            <button className="tier-button">Learn More</button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

@@ -14,9 +14,9 @@ const Hero = () => {
         <h2>WE BUILD FOR FANS.</h2>
         <p>
           Hqlnk™ provides high quality smart-links to help you promote your
-          craft all at an affordable cost.
+          craft for an affordable cost.
         </p>
-        <button className="button" onClick={() => navigate("/register")}>
+        <button className="hero-button" onClick={() => navigate("/register")}>
           TRY FOR FREE
         </button>
       </div>

@@ -1,10 +1,12 @@
 .outer-hero {
   width: 100%;
   background-color: black;
+  z-index: -1;
 }
 
 .inner-hero {
   min-height: 475px;
+  z-index: -1;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -30,6 +32,14 @@
   p {
     color: var(--light-gray);
   }
+  @media screen and (max-width: 1024px) {
+    h2 {
+      text-align: center;
+    }
+    p {
+      text-align: center;
+    }
+  }
 }
 
 .overlay {
@@ -43,4 +53,18 @@
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.781); /* Black background with opacity */
   z-index: -1; /* Specify a stack order in case you're using a different order for other elements */
+}
+
+.hero-button {
+  margin: 24px 0;
+  padding: 20px 35px;
+  border: 1px solid white;
+  color: white;
+  transition: 0.2 ease all;
+  background-color: transparent;
+  &:hover {
+    cursor: pointer;
+    background-color: white;
+    color: var(--accent);
+  }
 }

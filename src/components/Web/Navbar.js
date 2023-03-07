@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 
@@ -6,8 +6,19 @@ import "./Navbar.scss";
 
 const Navbar = () => {
   const localStorageUser = window.localStorage.getItem("APP_USER");
+  const [fixed, setFixed] = useState(false);
+
+  const toggleStickyHeader = () => {
+    if (window.scrollY >= 392) {
+      setFixed(true);
+    } else {
+      setFixed(false);
+    }
+  };
+
+  window.addEventListener("scroll", toggleStickyHeader);
   return (
-    <nav>
+    <nav className={fixed ? "sticky-nav" : "nav"}>
       <div className="inner-nav">
         <div className="nav-left-col">
           <Link to="/">
@@ -18,7 +29,9 @@ const Navbar = () => {
             />
           </Link>
           <ul>
-            <li>links</li>
+            <Link to="/links">
+              <li>links</li>
+            </Link>
             <li>about</li>
             <li>pricing</li>
             <li>contact</li>

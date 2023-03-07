@@ -1,8 +1,16 @@
-nav {
+.nav {
   display: flex;
   width: 100%;
   justify-content: center;
   box-shadow: var(--box-shadow);
+  background-color: white;
+  z-index: 9999;
+  transition: 0.2s ease all;
+}
+.sticky-nav {
+  @extend .nav;
+  position: fixed;
+  top: 0px;
 }
 .inner-nav {
   height: 81px;
@@ -10,9 +18,13 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-
+  z-index: 9;
   ul {
     display: flex;
+    a {
+      color: var(--dark-gray);
+      text-decoration: none;
+    }
   }
   li {
     font-size: 15px;
@@ -32,7 +44,8 @@ nav {
     border: none;
     outline: none;
     // margin-left: 45%;
-    min-width: 150px;
+    word-break: keep-all;
+    width: 200px;
     line-height: 1;
     transition: 0.2s ease all;
     background-color: var(--accent);

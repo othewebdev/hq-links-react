@@ -1,17 +1,24 @@
 import React from "react";
 import { Fade } from "react-reveal";
+import Footer from "../components/Web/Footer";
 import Hero from "../components/Web/Hero";
 import Monthly from "../components/Web/Monthly";
 import Navbar from "../components/Web/Navbar";
 import Tiers from "../components/Web/Tiers";
+import Trial from "../components/Web/Trial";
 import WeGotIt from "../components/Web/WeGotIt";
+import { Helmet } from "react-helmet";
 
 const LandingPage = () => {
   return (
     <main>
-      <Fade>
-        <Navbar />
-      </Fade>
+      <Helmet>
+        <title>
+          High quality smart-links for music promotion, marketing, and fan
+          interaction
+        </title>
+      </Helmet>
+      <Navbar />
       <Fade>
         <Hero />
       </Fade>
@@ -19,10 +26,13 @@ const LandingPage = () => {
         <WeGotIt />
       </Fade>
       <Fade>
-        <Monthly />
+        <Tiers />
       </Fade>
       <Fade>
-        <Tiers />
+        <Trial />
+      </Fade>
+      <Fade>
+        <Footer />
       </Fade>
     </main>
   );
