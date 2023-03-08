@@ -65,7 +65,17 @@ body {
 
 .nav-button-small {
   @extend .button-small;
-  margin-left: 128px;
+  margin-left: 100px;
+  display: flex;
+  align-items: center;
+  transition: 0.2s ease all;
+  p {
+    color: var(--accent);
+    margin-left: 12px;
+    &:hover {
+      color: var(--dark-gray);
+    }
+  }
 }
 
 input,

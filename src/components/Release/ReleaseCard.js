@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useContext, useState } from "react";
 import moment from "moment";
 import { Fade } from "react-reveal";
+import { FaArrowAltCircleUp } from "react-icons/fa";
 
 import "./ReleaseCard.scss";
 import { ReleaseContext } from "../../App";
@@ -44,55 +45,52 @@ const ReleaseCard = ({ release, user }) => {
             <h3 className="heading">{release.release.release_name}</h3>
             <p>{moment(release.release.release_date).format("DD/MM/YYYY")}</p>
           </div>
-          {openEditOptions ? (
-            <div className="release-card_right-column">
-              <button
-                className="button-small"
-                onClick={() => setOpenEditOptions(!openEditOptions)}
-              >
-                -
-              </button>
-              <Link to="/edit-release" state={{ release: release }}>
-                <button
-                  className="button-small"
-                  // onClick={() => handleEditRelease()}
-                >
-                  Edit
-                </button>
-              </Link>
 
-              {!openDeleteConfirm && (
-                <button
-                  className="button-small"
-                  onClick={() => setOpenDeleteConfirm(true)}
-                >
-                  Delete
-                </button>
-              )}
-            </div>
-          ) : (
-            <div className="release-card_right-column">
+          <div className="release-card_right-column">
+            {!openEditOptions && (
               <button
                 className="button-small"
                 onClick={() => setOpenEditOptions(true)}
               >
                 More
               </button>
-              <Link
-                to={`/release/${release.release.release_name}`}
-                state={{ release: release }}
-              >
-                <button
-                  className="button-small"
-                  onClick={() => setOpenEditOptions(true)}
-                >
-                  Visit
-                </button>
-              </Link>
-            </div>
-          )}
+            )}
+            <Link
+              to={`/release/${release.release.release_name}`}
+              state={{ release: release }}
+            >
+              <button className="button-small">Visit</button>
+            </Link>
+          </div>
         </div>
       </div>
+      {openEditOptions && (
+        <div className="release-card_outer">
+          <button
+            className="button-small"
+            onClick={() => setOpenEditOptions(false)}
+          >
+            <FaArrowAltCircleUp size={16} />
+          </button>
+          <Link to="/edit-release" state={{ release: release }}>
+            <button
+              className="button-small"
+              // onClick={() => handleEditRelease()}
+            >
+              Edit
+            </button>
+          </Link>
+
+          {!openDeleteConfirm && (
+            <button
+              className="button-small"
+              onClick={() => setOpenDeleteConfirm(true)}
+            >
+              Delete
+            </button>
+          )}
+        </div>
+      )}
       {openDeleteConfirm && (
         <Fade>
           <div

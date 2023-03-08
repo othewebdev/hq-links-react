@@ -12,7 +12,7 @@ const ProfileDropdown = ({ currentUser }) => {
     setTimeout(() => {
       window.localStorage.removeItem("APP_USER");
       navigate("/");
-    }, 1400);
+    }, 400);
   };
 
   return (
@@ -24,7 +24,7 @@ const ProfileDropdown = ({ currentUser }) => {
               <img src="" alt="" />
               <div className="user-heading_inner">
                 <p>@{currentUser}</p>
-                <p>hqrl.link/{currentUser}</p>
+                <p>hqlnk.us/{currentUser}</p>
               </div>
             </div>
             <h5 className="heading">Account</h5>

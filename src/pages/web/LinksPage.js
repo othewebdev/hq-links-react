@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import { Fade } from "react-reveal";
 import Footer from "../../components/Web/Footer";
 import Navbar from "../../components/Web/Navbar";
+import Header from "./sections/links-page/Header";
 
 const LinksPage = () => {
   return (
@@ -10,11 +11,9 @@ const LinksPage = () => {
       <Helmet>
         <title>Links | Hqlnk</title>
       </Helmet>
+      <Navbar />
       <Fade>
-        <Navbar />
-      </Fade>
-      <Fade>
-        <p>hello</p>
+        <Header />
       </Fade>
       <Fade>
         <Footer />

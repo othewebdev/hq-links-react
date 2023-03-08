@@ -5,6 +5,7 @@ import "./Hero.scss";
 
 const Hero = () => {
   const navigate = useNavigate();
+  const localStorageUser = window.localStorage.getItem("APP_USER");
   return (
     <div className="outer-hero">
       <div className="inner-hero">
@@ -16,8 +17,8 @@ const Hero = () => {
           Hqlnk™ provides high quality smart-links to help you promote your
           craft for an affordable cost.
         </p>
-        <button className="hero-button" onClick={() => navigate("/register")}>
-          TRY FOR FREE
+        <button className="hero-button" onClick={() => navigate("/login")}>
+          {localStorageUser ? "GO TO DASHBOARD" : "TRY FOR FREE"}
         </button>
       </div>
     </div>

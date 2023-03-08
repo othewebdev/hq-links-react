@@ -6,10 +6,11 @@ import "./Navbar.scss";
 
 const Navbar = () => {
   const localStorageUser = window.localStorage.getItem("APP_USER");
+  const userProfilePicture = window.localStorage.getItem("PROFILE_PIC");
   const [fixed, setFixed] = useState(false);
 
   const toggleStickyHeader = () => {
-    if (window.scrollY >= 392) {
+    if (window.scrollY >= 0) {
       setFixed(true);
     } else {
       setFixed(false);
@@ -18,7 +19,7 @@ const Navbar = () => {
 
   window.addEventListener("scroll", toggleStickyHeader);
   return (
-    <nav className={fixed ? "sticky-nav" : "nav"}>
+    <nav className="sticky-nav">
       <div className="inner-nav">
         <div className="nav-left-col">
           <Link to="/">
@@ -47,9 +48,10 @@ const Navbar = () => {
             </Link>
           </div>
         ) : (
-          <Link to="/register">
+          <Link to="/register" className="nav-link">
             <button className="nav-button-small">
-              {localStorageUser}'s Dashboard →
+              <img src={userProfilePicture} width={32} alt="" />
+              <p>{localStorageUser}'s Dashboard →</p>
             </button>
           </Link>
         )}

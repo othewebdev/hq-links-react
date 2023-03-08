@@ -13,7 +13,7 @@ const WeGotIt = () => {
           <img
             src="https://res.cloudinary.com/dhnlz1f7q/image/upload/v1678215062/pkep0gdanboih8jzlpkq.png"
             alt=""
-            height={300}
+            height={220}
           />
         </div>
         <div className="section-image-col">
@@ -21,7 +21,7 @@ const WeGotIt = () => {
           <img
             src="https://res.cloudinary.com/dhnlz1f7q/image/upload/v1678215062/rybwtf8w24gp2yf5lfxq.png"
             alt=""
-            height={300}
+            height={250}
           />
         </div>
         <div className="section-image-col">
@@ -29,7 +29,7 @@ const WeGotIt = () => {
           <img
             src="https://res.cloudinary.com/dhnlz1f7q/image/upload/v1678215062/avwq1ksrypbhm75qfofi.png"
             alt=""
-            height={300}
+            height={220}
           />
         </div>
       </div>

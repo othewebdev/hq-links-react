@@ -6,30 +6,26 @@ import { Formik, Field, ErrorMessage, Form } from "formik";
 import TextError from "../Formik/TextError";
 
 const Register = () => {
-  const [registerUser, setRegisterUser] = useState("");
-  const [registerPass, setRegisterPass] = useState("");
   const [profilePicture, setProfilePicture] = useState("");
   const [message, setMessage] = useState("");
 
   const navigate = useNavigate();
 
   const registerNewUser = (values) => {
-    setTimeout(async () => {
-      await axios({
-        method: "POST",
-        data: {
-          username: values.username,
-          password: values.password,
-          imageurl:
-            profilePicture ||
-            `https://ui-avatars.com/api/?background=random&name=${registerUser}&rounded=true`,
-        },
-        withCredentials: true,
-        url: "http://localhost:4000/register",
-      })
-        .then((res) => console.log(res))
-        .catch((err) => setMessage(err.message));
-    }, 1200);
+    axios({
+      method: "POST",
+      data: {
+        username: values.username,
+        password: values.password,
+        imageurl:
+          (profilePicture !== "" && profilePicture) ||
+          `https://ui-avatars.com/api/?background=random&name=${values.username}&rounded=true`,
+      },
+      withCredentials: true,
+      url: "http://localhost:4000/register",
+    })
+      .then((res) => console.log(res))
+      .catch((err) => setMessage(err.message));
   };
   // Upload Widget
 
@@ -81,7 +77,7 @@ const Register = () => {
       <h3 className="heading">Register</h3>
       <Formik
         initialValues={{ username: "", password: "" }}
-        onSubmit={registerUser}
+        onSubmit={registerNewUser}
       >
         <Form>
           <div className="input-container">

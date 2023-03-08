@@ -18,7 +18,7 @@ const Tiers = () => {
       name: "Pro",
       price: 9.99,
       benefits: [
-        "All Individual benefits",
+        "All Individual benefits**",
         "Unlimited pre-release links",
         "Unlimited content links",
         "QR Code for every release",
@@ -28,7 +28,7 @@ const Tiers = () => {
       name: "Supreme",
       price: 19.99,
       benefits: [
-        "All Pro benefits",
+        "All Pro benefits**",
         "Add 10 users to your team",
         "Board insight analytics package",
         "Excel report export (XLS, CSV)",
@@ -36,24 +36,21 @@ const Tiers = () => {
       ],
     },
   ];
+  const pricingTableProps = {
+    id: process.env.REACT_APP_STRIPE_PRODUCT_TABLE_ID,
+    publishableKey: process.env.REACT_APP_STRIPE_PUBLIC_PRODUCT_TABLE_KEY,
+  };
+
+  console.log(pricingTableProps);
+
   return (
     <div className="section-container">
       <p>Still not convinced?</p>
       <h2>See our pricing tiers</h2>
-      <div className="tier-container">
-        {tiers.map((tier) => (
-          <div className="tier-card">
-            <h3>{tier.name}</h3>
-            <ul>
-              {tier.benefits.map((benefit) => (
-                <li>{benefit}</li>
-              ))}
-            </ul>
-            <h2>${tier.price}</h2>
-            <button className="tier-button">Learn More</button>
-          </div>
-        ))}
-      </div>
+      <stripe-pricing-table
+        pricing-table-id={pricingTableProps.id}
+        publishable-key={pricingTableProps.publishableKey}
+      />
     </div>
   );
 };

@@ -25,6 +25,7 @@ const Login = () => {
       url: "http://localhost:4000/user",
     })
       .then((res) => {
+        window.localStorage.setItem("PROFILE_PIC", res.data.profilePicture);
         window.localStorage.setItem("APP_USER", res.data.username);
       })
       .catch((err) => console.log(err.message));

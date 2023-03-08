@@ -4,7 +4,7 @@
   text-align: start;
   margin-top: 12px;
   z-index: 999;
-  right: 40px;
+  right: 28%;
   background-color: white;
   ul {
     list-style-type: none;
@@ -39,6 +39,9 @@
     display: flex;
   }
   .user-heading_inner {
+    p {
+      color: var(--dark-gray);
+    }
     display: flex;
     flex-direction: column;
   }

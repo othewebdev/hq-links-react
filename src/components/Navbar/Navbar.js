@@ -8,6 +8,7 @@ import "./Navbar.scss";
 
 const Navbar = () => {
   const localStorageUser = window.localStorage.getItem("APP_USER");
+  const userProfilePicture = window.localStorage.getItem("PROFILE_PIC");
   const [openDropdown, setOpenDropdown] = useState(false);
 
   return (
@@ -45,7 +46,7 @@ const Navbar = () => {
             onClick={() => setOpenDropdown(!openDropdown)}
             className="nav-profile-container"
           >
-            <img src="" alt="Profile Picture" />
+            <img src={userProfilePicture} width={32} alt="Profile Picture" />
           </div>
           {openDropdown && <ProfileDropdown currentUser={localStorageUser} />}
         </div>
