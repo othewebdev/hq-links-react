@@ -1,12 +1,12 @@
 import React, { createContext, useEffect, useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import Dashboard from "./components/Dashboard/Dashboard";
+import { ContextProvider } from "./contexts/ContextProvider";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 
 import axios from "axios";
 import Layout from "./components/Layout/Layout";
-import "./global.scss";
+
 import AddDSPsPage from "./pages/AddDSPsPage";
 import AddLinkPage from "./pages/AddLinkPage";
 import AddReleasePage from "./pages/AddReleasePage";
@@ -16,6 +16,10 @@ import PreviewRelease from "./components/Release/Preview/PreviewRelease";
 import LandingPage from "./pages/LandingPage";
 import LinksPage from "./pages/web/LinksPage";
 import SelectTier from "./pages/web/SelectTier";
+import LinkDashboard from "./components/LinkDashboard/LinkDashboard";
+
+import "./global.scss";
+import "./index.css";
 
 export const ReleaseContext = createContext();
 export const UploadImageContext = createContext();
@@ -53,46 +57,48 @@ function App() {
 
   return (
     <div className="App">
-      <UserContext.Provider value={{ user, setUser }}>
-        <ReleaseFormContext.Provider
-          value={{ releaseFormDetails, setReleaseFormDetails }}
-        >
-          <ReleaseContext.Provider
-            value={{ currentRelease, setCurrentRelease }}
+      <ContextProvider>
+        <UserContext.Provider value={{ user, setUser }}>
+          <ReleaseFormContext.Provider
+            value={{ releaseFormDetails, setReleaseFormDetails }}
           >
-            <UploadImageContext.Provider
-              value={[uploadedImage, setUploadedImage]}
+            <ReleaseContext.Provider
+              value={{ currentRelease, setCurrentRelease }}
             >
-              <Routes>
-                <Route path="/" element={<LandingPage />} />
-                <Route path="/tiers" element={<SelectTier />} />
-                <Route path="/links" element={<LinksPage />} />
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/register" element={<RegisterPage />} />
-                <Route
-                  path="/release/:release_name"
-                  element={<PreviewRelease />}
-                />
-                <Route path="/" element={<Navigate to="/admin" replace />} />
-                <Route path="/" element={<Layout />}>
+              <UploadImageContext.Provider
+                value={[uploadedImage, setUploadedImage]}
+              >
+                <Routes>
+                  <Route path="/" element={<LandingPage />} />
+                  <Route path="/tiers" element={<SelectTier />} />
+                  <Route path="/links" element={<LinksPage />} />
+                  <Route path="/login" element={<LoginPage />} />
+                  <Route path="/register" element={<RegisterPage />} />
                   <Route
-                    path="/add-release"
-                    element={<AddReleasePage artistList={artistList} />}
+                    path="/release/:release_name"
+                    element={<PreviewRelease />}
                   />
-                  <Route path="/new-link" element={<AddLinkPage />} />
-                  <Route
-                    path="/finalize-release"
-                    element={<ReleasePreviewPage />}
-                  />
-                  <Route path="/add-links" element={<AddDSPsPage />} />
-                  <Route path="/edit-release" element={<EditReleasePage />} />
-                  <Route path="/admin" element={<Dashboard />} />
-                </Route>
-              </Routes>
-            </UploadImageContext.Provider>
-          </ReleaseContext.Provider>
-        </ReleaseFormContext.Provider>
-      </UserContext.Provider>
+                  <Route path="/admin" element={<LinkDashboard />} />
+                  <Route path="/" element={<Navigate to="/admin" replace />} />
+                  <Route path="/" element={<Layout />}>
+                    <Route
+                      path="/add-release"
+                      element={<AddReleasePage artistList={artistList} />}
+                    />
+                    <Route path="/new-link" element={<AddLinkPage />} />
+                    <Route
+                      path="/finalize-release"
+                      element={<ReleasePreviewPage />}
+                    />
+                    <Route path="/add-links" element={<AddDSPsPage />} />
+                    <Route path="/edit-release" element={<EditReleasePage />} />
+                  </Route>
+                </Routes>
+              </UploadImageContext.Provider>
+            </ReleaseContext.Provider>
+          </ReleaseFormContext.Provider>
+        </UserContext.Provider>
+      </ContextProvider>
     </div>
   );
 }
