@@ -7,17 +7,7 @@ import "./Navbar.scss";
 const Navbar = () => {
   const localStorageUser = window.localStorage.getItem("APP_USER");
   const userProfilePicture = window.localStorage.getItem("PROFILE_PIC");
-  const [fixed, setFixed] = useState(false);
 
-  const toggleStickyHeader = () => {
-    if (window.scrollY >= 0) {
-      setFixed(true);
-    } else {
-      setFixed(false);
-    }
-  };
-
-  window.addEventListener("scroll", toggleStickyHeader);
   return (
     <nav className="sticky-nav">
       <div className="inner-nav">

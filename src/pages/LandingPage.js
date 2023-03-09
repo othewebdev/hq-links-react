@@ -2,12 +2,11 @@ import React from "react";
 import { Fade } from "react-reveal";
 import Footer from "../components/Web/Footer";
 import Hero from "../components/Web/Hero";
-import Monthly from "../components/Web/Monthly";
 import Navbar from "../components/Web/Navbar";
 import Tiers from "../components/Web/Tiers";
 import Trial from "../components/Web/Trial";
-import WeGotIt from "../components/Web/WeGotIt";
 import { Helmet } from "react-helmet";
+import ReleaseTypes from "../components/Web/ReleaseTypes";
 
 const LandingPage = () => {
   return (
@@ -23,7 +22,7 @@ const LandingPage = () => {
         <Hero />
       </Fade>
       <Fade>
-        <WeGotIt />
+        <ReleaseTypes />
       </Fade>
       <Fade>
         <Tiers />

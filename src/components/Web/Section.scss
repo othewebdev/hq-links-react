@@ -3,18 +3,19 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 48px 0;
-  min-height: 450px;
+  min-height: 430px;
   p {
     margin: 8px 0;
   }
-  p::first-letter {
+  p:nth-child(0):first-letter {
     text-transform: capitalize;
   }
   h2 {
     font-weight: 800;
     text-transform: capitalize;
-    font-size: 48px;
+    font-size: 36px;
+    margin: 36px 0;
+    color: var(--dark-gray);
   }
   @media screen and (max-width: 1024px) {
     h2 {
@@ -75,30 +76,6 @@
   }
 }
 
-.tier-container {
-  justify-content: center;
-  display: flex;
-  margin: 64px 0;
-  flex-wrap: wrap;
-  .tier-card:nth-child(2) {
-    background-color: white;
-    color: var(--accent);
-    margin-top: 75px;
-    button {
-      background-color: var(--accent);
-      &:hover {
-        background-color: transparent;
-        color: var(--accent);
-        border: 1px solid var(--accent);
-      }
-    }
-  }
-  @media screen and (max-width: 1024px) {
-    .tier-card:nth-child(2) {
-      margin: 16px 0;
-    }
-  }
-}
 .trial-banner {
   width: 100%;
   max-width: 1200px;

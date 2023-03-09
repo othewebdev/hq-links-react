@@ -11,8 +11,6 @@ const Hero = () => {
       <div className="inner-hero">
         <div className="overlay" />
         <h2>WE BUILD FOR ARTISTS.</h2>
-        <h2>WE BUILD FOR LABELS.</h2>
-        <h2>WE BUILD FOR FANS.</h2>
         <p>
           Hqlnk™ provides high quality smart-links to help you promote your
           craft for an affordable cost.

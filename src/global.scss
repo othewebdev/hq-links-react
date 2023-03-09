@@ -215,3 +215,14 @@ p {
   transition: 0.2s ease all;
   background: var(--dark-gray);
 }
+
+::-moz-selection {
+  /* Code for Firefox */
+  color: white;
+  background: var(--accent);
+}
+
+::selection {
+  color: white;
+  background: var(--accent);
+}
